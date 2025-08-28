@@ -79,6 +79,31 @@ const labelColors: Record<ConventionalLabel, string> = {
   quibble: colorLUT['Blue'] || 'blue',
 };
 
+// Color mapping for conventional comment decorations using LUT
+const decorationColors: Record<ConventionalDecoration, string> = {
+  'non-blocking': colorLUT['LightGreen'] || 'brightgreen',
+  'blocking': colorLUT['Red'] || 'red',
+  'if-minor': colorLUT['Yellow'] || 'yellow',
+  'security': colorLUT['Red'] || 'red',
+  'test': colorLUT['Cyan'] || 'lightblue',
+  'ux': colorLUT['MintGreen'] || 'lightgreen',
+  'performance': colorLUT['Orange'] || 'orange',
+  'accessibility': colorLUT['Blue'] || 'blue',
+  'documentation': colorLUT['BlueGray'] || 'blue',
+  'style': colorLUT['Cream'] || 'lightgray',
+  'refactor': colorLUT['DarkBlue'] || 'blue',
+  'bug': colorLUT['Red'] || 'red',
+  'feature': colorLUT['LightGreen'] || 'green',
+  'breaking': colorLUT['Red'] || 'red',
+  'deprecated': colorLUT['Orange'] || 'orange',
+  'experimental': colorLUT['Cyan'] || 'lightblue',
+  'wip': colorLUT['Yellow'] || 'yellow',
+  'draft': colorLUT['Cream'] || 'lightgray',
+  'review': colorLUT['Blue'] || 'blue',
+  'approved': colorLUT['LightGreen'] || 'green',
+  'rejected': colorLUT['Red'] || 'red',
+};
+
 // Conventional shield options interface
 interface ConventionalShieldOptions extends Omit<BadgeOptions, 'message'> {
   label: ConventionalLabel;                    // Required: The type of comment
@@ -137,11 +162,7 @@ function generateBadge(options: BadgeOptions): string {
   }
 
   if (options.labelColor) {
-    queryParams.append('labelColor', options.labelColor);
-  }
-
-  if (options.color) {
-    queryParams.append('color', normalizeColor(options.color));
+    queryParams.append('labelColor', normalizeColor(options.labelColor));
   }
 
   if (options.cacheSeconds) {
@@ -176,8 +197,23 @@ function generateConventionalShield(options: ConventionalShieldOptions): string 
     message = decorations.join(',');
   }
 
-  // Auto-assign colors based on label type if enabled
-  const color = autoColor ? labelColors[label] : badgeOptions.color;
+  // Auto-assign colors based on label type and decorations if enabled
+  let color = badgeOptions.color;
+  let labelColor = badgeOptions.labelColor;
+
+  if (autoColor) {
+    // Auto-color the label (left side)
+    labelColor = labelColors[label];
+
+    // Auto-color the message (right side) based on decorations
+    if (decorations.length > 0) {
+      // Use the first decoration's color, or fall back to label color
+      color = decorationColors[decorations[0]] || labelColors[label];
+    } else {
+      // No decorations, use label color for message
+      color = labelColors[label];
+    }
+  }
 
   // Generate badge with conventional comment formatting
   return generateBadge({
@@ -185,6 +221,7 @@ function generateConventionalShield(options: ConventionalShieldOptions): string 
     label,
     message,
     color,
+    labelColor,
     style: badgeOptions.style || 'flat'
   });
 }

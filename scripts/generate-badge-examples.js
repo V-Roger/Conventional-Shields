@@ -51,6 +51,13 @@ function generateMarkdown() {
 
 This file contains examples of all conventional comment badges with their respective colors.
 
+## Auto-Coloring Features
+
+Conventional comment badges automatically color both the label and message parts:
+- **Label colors** are based on the comment type (praise, suggestion, issue, etc.)
+- **Message colors** are based on the first decoration (security, blocking, performance, etc.)
+- **No decorations**: Both label and message use the label's color
+
 ## All Labels
 
 `;
@@ -71,9 +78,9 @@ This file contains examples of all conventional comment badges with their respec
   });
 
   // Add with decorations section
-  markdown += `## With Decorations
+  markdown += `## Auto-Coloring Examples
 
-### Examples with Common Decorations
+### Examples with Different Decorations
 
 `;
 
@@ -81,27 +88,42 @@ This file contains examples of all conventional comment badges with their respec
     {
       label: 'suggestion',
       decorations: ['security', 'blocking'],
-      description: 'Blocking security suggestion'
+      description: 'Blocking security suggestion (BlueGray label, Red message)'
     },
     {
       label: 'issue',
       decorations: ['ux', 'non-blocking'],
-      description: 'Non-blocking UX issue'
+      description: 'Non-blocking UX issue (Yellow label, MintGreen message)'
     },
     {
       label: 'suggestion',
       decorations: ['test', 'if-minor'],
-      description: 'Test suggestion (if-minor)'
+      description: 'Test suggestion (BlueGray label, Cyan message)'
     },
     {
       label: 'question',
       decorations: ['performance', 'non-blocking'],
-      description: 'Performance question'
+      description: 'Performance question (DarkBlue label, Orange message)'
     },
     {
       label: 'todo',
       decorations: ['accessibility'],
-      description: 'Accessibility todo'
+      description: 'Accessibility todo (Cream label, Blue message)'
+    },
+    {
+      label: 'praise',
+      decorations: ['feature'],
+      description: 'Feature praise (LightGreen label, LightGreen message)'
+    },
+    {
+      label: 'thought',
+      decorations: ['refactor'],
+      description: 'Refactor thought (Cyan label, DarkBlue message)'
+    },
+    {
+      label: 'chore',
+      decorations: ['deprecated'],
+      description: 'Deprecated chore (DarkOrange label, Orange message)'
     }
   ];
 
@@ -119,6 +141,36 @@ This file contains examples of all conventional comment badges with their respec
     markdown += `---\n\n`;
   });
 
+  // Add manual override examples
+  markdown += `## Manual Color Override
+
+You can disable auto-coloring and use custom colors:
+
+\`\`\`typescript
+const customBadge = generateConventionalShield({
+  label: 'praise',
+  decorations: ['security'],
+  autoColor: false,
+  color: '#ff0000',        // Red message
+  labelColor: '#00ff00'    // Green label
+});
+\`\`\`
+
+`;
+
+  const manualBadge = generateConventionalShield({
+    label: 'praise',
+    decorations: ['security'],
+    autoColor: false,
+    color: '#ff0000',
+    labelColor: '#00ff00'
+  });
+
+  markdown += `**Manual colors:** Red message, Green label\n\n`;
+  markdown += `![manual](${manualBadge})\n\n`;
+  markdown += `\`\`\`markdown\n![manual](${manualBadge})\n\`\`\`\n\n`;
+  markdown += `---\n\n`;
+
   // Add color palette section
   markdown += `## Color Palette
 
@@ -133,24 +185,24 @@ The following colors are used in the badges:
   markdown += `
 ## Usage
 
-### CLI Usage
-
-\`\`\`bash
-# Generate a badge with decorations
-conventional-shields generate ${labels[0]} non-blocking
-
-# Generate with multiple decorations
-conventional-shields generate ${labels[1]} style non-blocking
-\`\`\`
-
 ### Programmatic Usage
 
 \`\`\`typescript
 import { generateConventionalShield } from 'conventional-shields';
 
+// Auto-colored badge
 const badge = generateConventionalShield({
   label: '${labels[0]}',
   decorations: ['non-blocking']
+});
+
+// Manual colors
+const customBadge = generateConventionalShield({
+  label: '${labels[1]}',
+  decorations: ['style'],
+  autoColor: false,
+  color: '#ff0000',
+  labelColor: '#00ff00'
 });
 \`\`\`
 
@@ -170,6 +222,17 @@ ${labels.map(label => `- **${label}**`).join('\n')}
 - **accessibility** - Accessibility related
 - **documentation** - Documentation related
 - **style** - Code style related
+- **refactor** - Refactoring suggestion
+- **bug** - Bug-related
+- **feature** - Feature-related
+- **breaking** - Breaking change
+- **deprecated** - Deprecation related
+- **experimental** - Experimental feature
+- **wip** - Work in progress
+- **draft** - Draft status
+- **review** - Review related
+- **approved** - Approved status
+- **rejected** - Rejected status
 
 ---
 

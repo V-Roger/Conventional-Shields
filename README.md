@@ -70,6 +70,12 @@ const customBadge = generateConventionalShield({
 });
 ```
 
+**Auto-Coloring**: Conventional comment badges automatically color both the label and message parts:
+- **Label colors** are based on the comment type (praise, suggestion, issue, etc.)
+- **Message colors** are based on the first decoration (security, blocking, performance, etc.)
+- **No decorations**: Both label and message use the label's color
+- **Manual override**: Set `autoColor: false` to use custom colors
+
 ### Advanced Options
 
 ```typescript
@@ -180,23 +186,32 @@ const issueBadge = generateIssueBadge(['blocking']); // Uses Yellow
 ### Conventional Comments Badges
 
 ```typescript
-// Praise comment
+// Praise comment (auto-colored: LightGreen label, LightGreen message)
 const praiseBadge = generatePraiseBadge(['non-blocking']);
 
-// Suggestion with decorations
-const suggestionBadge = generateSuggestionBadge(['style', 'non-blocking']);
+// Suggestion with decorations (auto-colored: BlueGray label, Red message)
+const suggestionBadge = generateSuggestionBadge(['security', 'blocking']);
 
-// Issue with blocking decoration
+// Issue with blocking decoration (auto-colored: Yellow label, Red message)
 const issueBadge = generateIssueBadge(['performance', 'blocking']);
 
-// Question for clarification
+// Question for clarification (auto-colored: DarkBlue label, LightGreen message)
 const questionBadge = generateQuestionBadge(['non-blocking']);
 
-// Todo with test decoration
+// Todo with test decoration (auto-colored: Cream label, Cyan message)
 const todoBadge = generateTodoBadge(['test']);
 
-// Chore with documentation decoration
+// Chore with documentation decoration (auto-colored: DarkOrange label, BlueGray message)
 const choreBadge = generateChoreBadge(['documentation']);
+
+// Manual color override
+const customBadge = generateConventionalShield({
+  label: 'praise',
+  decorations: ['security'],
+  autoColor: false,
+  color: '#ff0000',
+  labelColor: '#00ff00'
+});
 ```
 
 ### Available Labels

@@ -25,14 +25,6 @@
       "hex": "#90be6d"
     },
     {
-      "name": "Teal",
-      "hex": "#43aa8b"
-    },
-    {
-      "name": "DarkTeal",
-      "hex": "#4d908e"
-    },
-    {
       "name": "BlueGray",
       "hex": "#577590"
     },
@@ -61,20 +53,12 @@
       "hex": "#e9d8a6"
     },
     {
-      "name": "Amber",
-      "hex": "#ee9b00"
-    },
-    {
       "name": "DarkOrange",
       "hex": "#ca6702"
     },
     {
       "name": "BurntOrange",
       "hex": "#bb3e03"
-    },
-    {
-      "name": "DarkRed",
-      "hex": "#ae2012"
     },
     {
       "name": "Burgundy",

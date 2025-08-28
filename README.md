@@ -124,7 +124,7 @@ interface BadgeOptions {
 
 ### Color Palette
 
-The library includes a curated palette of 20 carefully selected colors for consistent badge styling:
+The library includes a curated palette of 16 carefully selected colors for consistent badge styling (deduplicated to remove similar colors):
 
 ```typescript
 import { palette } from 'conventional-shields';
@@ -140,8 +140,7 @@ import { palette } from 'conventional-shields';
 | ![LightOrange](https://img.shields.io/badge/LightOrange-f9844a?style=flat-square&color=f9844a) | LightOrange | `#f9844a` | ![LightOrange](https://img.shields.io/badge/-f9844a?style=flat-square&color=f9844a) |
 | ![Yellow](https://img.shields.io/badge/Yellow-f9c74f?style=flat-square&color=f9c74f) | Yellow | `#f9c74f` | ![Yellow](https://img.shields.io/badge/-f9c74f?style=flat-square&color=f9c74f) |
 | ![LightGreen](https://img.shields.io/badge/LightGreen-90be6d?style=flat-square&color=90be6d) | LightGreen | `#90be6d` | ![LightGreen](https://img.shields.io/badge/-90be6d?style=flat-square&color=90be6d) |
-| ![Teal](https://img.shields.io/badge/Teal-43aa8b?style=flat-square&color=43aa8b) | Teal | `#43aa8b` | ![Teal](https://img.shields.io/badge/-43aa8b?style=flat-square&color=43aa8b) |
-| ![DarkTeal](https://img.shields.io/badge/DarkTeal-4d908e?style=flat-square&color=4d908e) | DarkTeal | `#4d908e` | ![DarkTeal](https://img.shields.io/badge/-4d908e?style=flat-square&color=4d908e) |
+
 | ![BlueGray](https://img.shields.io/badge/BlueGray-577590?style=flat-square&color=577590) | BlueGray | `#577590` | ![BlueGray](https://img.shields.io/badge/-577590?style=flat-square&color=577590) |
 | ![Blue](https://img.shields.io/badge/Blue-277da1?style=flat-square&color=277da1) | Blue | `#277da1` | ![Blue](https://img.shields.io/badge/-277da1?style=flat-square&color=277da1) |
 | ![Black](https://img.shields.io/badge/Black-001219?style=flat-square&color=001219) | Black | `#001219` | ![Black](https://img.shields.io/badge/-001219?style=flat-square&color=001219) |
@@ -149,10 +148,9 @@ import { palette } from 'conventional-shields';
 | ![Cyan](https://img.shields.io/badge/Cyan-0a9396?style=flat-square&color=0a9396) | Cyan | `#0a9396` | ![Cyan](https://img.shields.io/badge/-0a9396?style=flat-square&color=0a9396) |
 | ![MintGreen](https://img.shields.io/badge/MintGreen-94d2bd?style=flat-square&color=94d2bd) | MintGreen | `#94d2bd` | ![MintGreen](https://img.shields.io/badge/-94d2bd?style=flat-square&color=94d2bd) |
 | ![Cream](https://img.shields.io/badge/Cream-e9d8a6?style=flat-square&color=e9d8a6) | Cream | `#e9d8a6` | ![Cream](https://img.shields.io/badge/-e9d8a6?style=flat-square&color=e9d8a6) |
-| ![Amber](https://img.shields.io/badge/Amber-ee9b00?style=flat-square&color=ee9b00) | Amber | `#ee9b00` | ![Amber](https://img.shields.io/badge/-ee9b00?style=flat-square&color=ee9b00) |
+
 | ![DarkOrange](https://img.shields.io/badge/DarkOrange-ca6702?style=flat-square&color=ca6702) | DarkOrange | `#ca6702` | ![DarkOrange](https://img.shields.io/badge/-ca6702?style=flat-square&color=ca6702) |
 | ![BurntOrange](https://img.shields.io/badge/BurntOrange-bb3e03?style=flat-square&color=bb3e03) | BurntOrange | `#bb3e03` | ![BurntOrange](https://img.shields.io/badge/-bb3e03?style=flat-square&color=bb3e03) |
-| ![DarkRed](https://img.shields.io/badge/DarkRed-ae2012?style=flat-square&color=ae2012) | DarkRed | `#ae2012` | ![DarkRed](https://img.shields.io/badge/-ae2012?style=flat-square&color=ae2012) |
 | ![Burgundy](https://img.shields.io/badge/Burgundy-9b2226?style=flat-square&color=9b2226) | Burgundy | `#9b2226` | ![Burgundy](https://img.shields.io/badge/-9b2226?style=flat-square&color=9b2226) |
 
 #### Color Usage Examples

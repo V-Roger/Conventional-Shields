@@ -116,10 +116,10 @@ This file contains examples of all conventional comment badges with their respec
 
 **Decorations:** style
 
-![typo](https://img.shields.io/badge/typo-style-ee9b00?color=ee9b00)
+![typo](https://img.shields.io/badge/typo-style-f8961e?color=f8961e)
 
 ```markdown
-![typo](https://img.shields.io/badge/typo-style-ee9b00?color=ee9b00)
+![typo](https://img.shields.io/badge/typo-style-f8961e?color=f8961e)
 ```
 
 ---
@@ -227,8 +227,6 @@ The following colors are used in the badges:
 - **LightOrange**: `#f9844a`
 - **Yellow**: `#f9c74f`
 - **LightGreen**: `#90be6d`
-- **Teal**: `#43aa8b`
-- **DarkTeal**: `#4d908e`
 - **BlueGray**: `#577590`
 - **Blue**: `#277da1`
 - **Black**: `#001219`
@@ -236,10 +234,8 @@ The following colors are used in the badges:
 - **Cyan**: `#0a9396`
 - **MintGreen**: `#94d2bd`
 - **Cream**: `#e9d8a6`
-- **Amber**: `#ee9b00`
 - **DarkOrange**: `#ca6702`
 - **BurntOrange**: `#bb3e03`
-- **DarkRed**: `#ae2012`
 - **Burgundy**: `#9b2226`
 
 ## Usage
@@ -295,4 +291,4 @@ const badge = generateConventionalShield({
 
 ---
 
-*Generated on 2025-08-28T09:25:56.059Z*
+*Generated on 2025-08-28T09:39:14.756Z*

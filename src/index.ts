@@ -74,7 +74,7 @@ const labelColors: Record<ConventionalLabel, string> = {
   thought: colorLUT['Cyan'] || 'lightblue',
   chore: colorLUT['DarkOrange'] || 'brown',
   note: colorLUT['MintGreen'] || 'blue',
-  typo: colorLUT['Amber'] || 'orange',
+  typo: colorLUT['Orange'] || 'orange',
   polish: colorLUT['Blue'] || 'blue',
   quibble: colorLUT['Blue'] || 'blue',
 };

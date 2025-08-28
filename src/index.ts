@@ -136,7 +136,9 @@ function generateBadge(options: BadgeOptions): string {
     badgeContent += encodeBadgeContent(options.label);
   }
 
-  badgeContent += '-' + encodeBadgeContent(options.message);
+  if (options.message) {
+    badgeContent += '-' + encodeBadgeContent(options.message);
+  }
 
   if (options.color) {
     badgeContent += '-' + normalizeColor(options.color);

@@ -1,24 +1,40 @@
 {
   "colors": [
     {
+      "name": "Burgundy",
+      "hex": "#9b2226"
+    },
+    {
       "name": "Red",
       "hex": "#f94144"
     },
     {
-      "name": "OrangeRed",
-      "hex": "#f3722c"
+      "name": "BurntOrange",
+      "hex": "#bb3e03"
+    },
+    {
+      "name": "DarkOrange",
+      "hex": "#ca6702"
     },
     {
       "name": "Orange",
       "hex": "#f8961e"
     },
     {
-      "name": "LightOrange",
-      "hex": "#f9844a"
-    },
-    {
       "name": "Yellow",
       "hex": "#f9c74f"
+    },
+    {
+      "name": "Cream",
+      "hex": "#e9d8a6"
+    },
+    {
+      "name": "MintGreen",
+      "hex": "#94d2bd"
+    },
+    {
+      "name": "Cyan",
+      "hex": "#0a9396"
     },
     {
       "name": "LightGreen",
@@ -33,36 +49,12 @@
       "hex": "#277da1"
     },
     {
-      "name": "Black",
-      "hex": "#001219"
-    },
-    {
       "name": "DarkBlue",
       "hex": "#005f73"
     },
     {
-      "name": "Cyan",
-      "hex": "#0a9396"
-    },
-    {
-      "name": "MintGreen",
-      "hex": "#94d2bd"
-    },
-    {
-      "name": "Cream",
-      "hex": "#e9d8a6"
-    },
-    {
-      "name": "DarkOrange",
-      "hex": "#ca6702"
-    },
-    {
-      "name": "BurntOrange",
-      "hex": "#bb3e03"
-    },
-    {
-      "name": "Burgundy",
-      "hex": "#9b2226"
+      "name": "Black",
+      "hex": "#001219"
     }
   ]
 }

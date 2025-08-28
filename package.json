@@ -1,22 +1,36 @@
 {
-  "name": "Conventional-Shields",
+  "name": "conventional-shields",
   "version": "0.0.1",
   "description": "Conventional comments meets Shields.io",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
   "scripts": {
-    "generate": "node index.js"
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "generate-examples": "node scripts/generate-badge-examples.js"
   },
   "keywords": [
-    "conventional comments",
-    "code review",
+    "conventionalComments",
+    "codeReview",
     "shields",
     "shields.io",
-    "shields.io-badge"
+    "shields.io-badge",
+    "badges"
   ],
   "author": "Virgil ROGER<roger.virgil@gmail.com>",
   "license": "CC-BY-SA-4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/V-Roger/conventional-shields"
-  }
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  },
+  "files": [
+    "dist/",
+    "bin/"
+  ]
 }

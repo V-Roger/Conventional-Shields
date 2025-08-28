@@ -10,7 +10,9 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "generate-examples": "node scripts/generate-badge-examples.js"
+    "generate-examples": "node scripts/generate-badge-examples.js",
+    "build:extension": "node scripts/build-extension.js",
+    "extension": "npm run build:extension"
   },
   "keywords": [
     "conventionalComments",

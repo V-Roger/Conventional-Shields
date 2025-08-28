@@ -1,0 +1,22 @@
+{
+  "name": "Conventional-Shields",
+  "version": "0.0.1",
+  "description": "Conventional comments meets Shields.io",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node index.js"
+  },
+  "keywords": [
+    "conventional comments",
+    "code review",
+    "shields",
+    "shields.io",
+    "shields.io-badge"
+  ],
+  "author": "Virgil ROGER<roger.virgil@gmail.com>",
+  "license": "CC-BY-NC-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V-Roger/conventional-shields"
+  }
+}

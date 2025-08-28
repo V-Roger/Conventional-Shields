@@ -14,7 +14,7 @@
     "shields.io-badge"
   ],
   "author": "Virgil ROGER<roger.virgil@gmail.com>",
-  "license": "CC-BY-NC-SA-4.0",
+  "license": "CC-BY-SA-4.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/V-Roger/conventional-shields"

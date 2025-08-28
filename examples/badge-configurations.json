@@ -1,0 +1,374 @@
+{
+  "metadata": {
+    "generated": "2025-08-28T12:00:23.943Z",
+    "totalLabels": 12,
+    "totalConfigurations": 24,
+    "version": "1.0.0"
+  },
+  "labels": {
+    "praise": {
+      "description": "Praises highlight something positive",
+      "defaultColor": "#90be6d",
+      "relevantDecoration": [
+        "feature"
+      ]
+    },
+    "nitpick": {
+      "description": "Nitpicks are trivial preference-based requests",
+      "defaultColor": "#94d2bd",
+      "relevantDecoration": [
+        "style",
+        "non-blocking"
+      ]
+    },
+    "suggestion": {
+      "description": "Suggestions propose improvements",
+      "defaultColor": "#277da1",
+      "relevantDecoration": [
+        "performance"
+      ]
+    },
+    "issue": {
+      "description": "Issues highlight specific problems",
+      "defaultColor": "#f9c74f",
+      "relevantDecoration": [
+        "security",
+        "blocking"
+      ]
+    },
+    "todo": {
+      "description": "TODO's are small, trivial, but necessary changes",
+      "defaultColor": "#e9d8a6",
+      "relevantDecoration": [
+        "test"
+      ]
+    },
+    "question": {
+      "description": "Questions for clarification or investigation",
+      "defaultColor": "#1d3557",
+      "relevantDecoration": [
+        "ux"
+      ]
+    },
+    "thought": {
+      "description": "Thoughts represent ideas that popped up from reviewing",
+      "defaultColor": "#06ffa5",
+      "relevantDecoration": [
+        "refactor"
+      ]
+    },
+    "chore": {
+      "description": "Chores are simple tasks that must be done",
+      "defaultColor": "#ee6c4d",
+      "relevantDecoration": [
+        "documentation"
+      ]
+    },
+    "note": {
+      "description": "Notes highlight something the reader should take note of",
+      "defaultColor": "#001219",
+      "relevantDecoration": [
+        "security"
+      ]
+    },
+    "typo": {
+      "description": "Typo comments for misspellings",
+      "defaultColor": "#fb8500",
+      "relevantDecoration": [
+        "documentation"
+      ]
+    },
+    "polish": {
+      "description": "Polish comments for quality improvements",
+      "defaultColor": "#94d2bd",
+      "relevantDecoration": [
+        "ux"
+      ]
+    },
+    "quibble": {
+      "description": "Quibbles are very much like nitpicks",
+      "defaultColor": "#94d2bd",
+      "relevantDecoration": [
+        "style"
+      ]
+    }
+  },
+  "colorPalette": [
+    {
+      "name": "Burgundy",
+      "hex": "#9b2226"
+    },
+    {
+      "name": "Red",
+      "hex": "#f94144"
+    },
+    {
+      "name": "BurntOrange",
+      "hex": "#bb3e03"
+    },
+    {
+      "name": "DarkOrange",
+      "hex": "#ca6702"
+    },
+    {
+      "name": "Orange",
+      "hex": "#f8961e"
+    },
+    {
+      "name": "Yellow",
+      "hex": "#f9c74f"
+    },
+    {
+      "name": "Cream",
+      "hex": "#e9d8a6"
+    },
+    {
+      "name": "MintGreen",
+      "hex": "#94d2bd"
+    },
+    {
+      "name": "Cyan",
+      "hex": "#0a9396"
+    },
+    {
+      "name": "LightGreen",
+      "hex": "#90be6d"
+    },
+    {
+      "name": "BlueGray",
+      "hex": "#577590"
+    },
+    {
+      "name": "Blue",
+      "hex": "#277da1"
+    },
+    {
+      "name": "DarkBlue",
+      "hex": "#005f73"
+    },
+    {
+      "name": "Black",
+      "hex": "#001219"
+    }
+  ],
+  "configurations": [
+    {
+      "id": "praise-default",
+      "label": "praise",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/praise-90be6d?style=for-the-badge&labelColor=90be6d",
+      "description": "praise badge with no decorations",
+      "example": "Great work!"
+    },
+    {
+      "id": "praise-decorated",
+      "label": "praise",
+      "decorations": [
+        "feature"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/praise-feature-90be6d?style=for-the-badge&labelColor=90be6d",
+      "description": "praise badge with feature decoration",
+      "example": "Great feature implementation!"
+    },
+    {
+      "id": "nitpick-default",
+      "label": "nitpick",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/nitpick-94d2bd?style=for-the-badge&labelColor=94d2bd",
+      "description": "nitpick badge with no decorations",
+      "example": "Minor preference"
+    },
+    {
+      "id": "nitpick-decorated",
+      "label": "nitpick",
+      "decorations": [
+        "style",
+        "non-blocking"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/nitpick-style,non--blocking-001219?style=for-the-badge&labelColor=94d2bd",
+      "description": "nitpick badge with style, non-blocking decoration",
+      "example": "Minor style preference, not blocking"
+    },
+    {
+      "id": "suggestion-default",
+      "label": "suggestion",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/suggestion-277da1?style=for-the-badge&labelColor=277da1",
+      "description": "suggestion badge with no decorations",
+      "example": "Consider this improvement"
+    },
+    {
+      "id": "suggestion-decorated",
+      "label": "suggestion",
+      "decorations": [
+        "performance"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/suggestion-performance-bb3e03?style=for-the-badge&labelColor=277da1",
+      "description": "suggestion badge with performance decoration",
+      "example": "Consider performance optimization"
+    },
+    {
+      "id": "issue-default",
+      "label": "issue",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/issue-f9c74f?style=for-the-badge&labelColor=f9c74f",
+      "description": "issue badge with no decorations",
+      "example": "Issue found"
+    },
+    {
+      "id": "issue-decorated",
+      "label": "issue",
+      "decorations": [
+        "security",
+        "blocking"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/issue-security,blocking-9b2226?style=for-the-badge&labelColor=f9c74f",
+      "description": "issue badge with security, blocking decoration",
+      "example": "Critical security issue that blocks acceptance"
+    },
+    {
+      "id": "todo-default",
+      "label": "todo",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/todo-e9d8a6?style=for-the-badge&labelColor=e9d8a6",
+      "description": "todo badge with no decorations",
+      "example": "TODO item"
+    },
+    {
+      "id": "todo-decorated",
+      "label": "todo",
+      "decorations": [
+        "test"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/todo-test-0a9396?style=for-the-badge&labelColor=e9d8a6",
+      "description": "todo badge with test decoration",
+      "example": "Add tests for this feature"
+    },
+    {
+      "id": "question-default",
+      "label": "question",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/question-005f73?style=for-the-badge&labelColor=005f73",
+      "description": "question badge with no decorations",
+      "example": "Question about this"
+    },
+    {
+      "id": "question-decorated",
+      "label": "question",
+      "decorations": [
+        "ux"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/question-ux-94d2bd?style=for-the-badge&labelColor=005f73",
+      "description": "question badge with ux decoration",
+      "example": "UX design question"
+    },
+    {
+      "id": "thought-default",
+      "label": "thought",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/thought-0a9396?style=for-the-badge&labelColor=0a9396",
+      "description": "thought badge with no decorations",
+      "example": "Thought about this"
+    },
+    {
+      "id": "thought-decorated",
+      "label": "thought",
+      "decorations": [
+        "refactor"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/thought-refactor-005f73?style=for-the-badge&labelColor=0a9396",
+      "description": "thought badge with refactor decoration",
+      "example": "Refactoring idea"
+    },
+    {
+      "id": "chore-default",
+      "label": "chore",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/chore-ca6702?style=for-the-badge&labelColor=ca6702",
+      "description": "chore badge with no decorations",
+      "example": "Chore task"
+    },
+    {
+      "id": "chore-decorated",
+      "label": "chore",
+      "decorations": [
+        "documentation"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/chore-documentation-577590?style=for-the-badge&labelColor=ca6702",
+      "description": "chore badge with documentation decoration",
+      "example": "Update documentation"
+    },
+    {
+      "id": "note-default",
+      "label": "note",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/note-001219?style=for-the-badge&labelColor=001219",
+      "description": "note badge with no decorations",
+      "example": "Note about this"
+    },
+    {
+      "id": "note-decorated",
+      "label": "note",
+      "decorations": [
+        "security"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/note-security-9b2226?style=for-the-badge&labelColor=001219",
+      "description": "note badge with security decoration",
+      "example": "Security note"
+    },
+    {
+      "id": "typo-default",
+      "label": "typo",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/typo-f8961e?style=for-the-badge&labelColor=f8961e",
+      "description": "typo badge with no decorations",
+      "example": "Typo found"
+    },
+    {
+      "id": "typo-decorated",
+      "label": "typo",
+      "decorations": [
+        "documentation"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/typo-documentation-577590?style=for-the-badge&labelColor=f8961e",
+      "description": "typo badge with documentation decoration",
+      "example": "Fix documentation typo"
+    },
+    {
+      "id": "polish-default",
+      "label": "polish",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/polish-94d2bd?style=for-the-badge&labelColor=94d2bd",
+      "description": "polish badge with no decorations",
+      "example": "Polish needed"
+    },
+    {
+      "id": "polish-decorated",
+      "label": "polish",
+      "decorations": [
+        "ux"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/polish-ux-94d2bd?style=for-the-badge&labelColor=94d2bd",
+      "description": "polish badge with ux decoration",
+      "example": "UX polish needed"
+    },
+    {
+      "id": "quibble-default",
+      "label": "quibble",
+      "decorations": [],
+      "badgeUrl": "https://img.shields.io/badge/quibble-94d2bd?style=for-the-badge&labelColor=94d2bd",
+      "description": "quibble badge with no decorations",
+      "example": "Minor quibble"
+    },
+    {
+      "id": "quibble-decorated",
+      "label": "quibble",
+      "decorations": [
+        "style"
+      ],
+      "badgeUrl": "https://img.shields.io/badge/quibble-style-001219?style=for-the-badge&labelColor=94d2bd",
+      "description": "quibble badge with style decoration",
+      "example": "Style quibble"
+    }
+  ]
+}

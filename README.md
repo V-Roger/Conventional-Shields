@@ -188,6 +188,24 @@ The library supports all [Conventional Comments](https://conventionalcomments.or
 - **polish** - nitpick-like quality improvements
 - **quibble** - Very much like nitpicks
 
+### Badge Examples
+
+#### Default Badges (No Decorations)
+
+| | | | |
+|---|---|---|---|
+| ![praise](https://img.shields.io/badge/praise-90be6d?style=for-the-badge&labelColor=90be6d) | ![nitpick](https://img.shields.io/badge/nitpick-94d2bd?style=for-the-badge&labelColor=94d2bd) | ![suggestion](https://img.shields.io/badge/suggestion-277da1?style=for-the-badge&labelColor=277da1) | ![issue](https://img.shields.io/badge/issue-f9c74f?style=for-the-badge&labelColor=f9c74f) |
+| ![todo](https://img.shields.io/badge/todo-e9d8a6?style=for-the-badge&labelColor=e9d8a6) | ![question](https://img.shields.io/badge/question-005f73?style=for-the-badge&labelColor=005f73) | ![thought](https://img.shields.io/badge/thought-0a9396?style=for-the-badge&labelColor=0a9396) | ![chore](https://img.shields.io/badge/chore-ca6702?style=for-the-badge&labelColor=ca6702) |
+| ![note](https://img.shields.io/badge/note-001219?style=for-the-badge&labelColor=001219) | ![typo](https://img.shields.io/badge/typo-f8961e?style=for-the-badge&labelColor=f8961e) | ![polish](https://img.shields.io/badge/polish-94d2bd?style=for-the-badge&labelColor=94d2bd) | ![quibble](https://img.shields.io/badge/quibble-94d2bd?style=for-the-badge&labelColor=94d2bd) |
+
+#### Decorated Badges (With Relevant Decorations)
+
+| | | | |
+|---|---|---|---|
+| ![praise-feature](https://img.shields.io/badge/praise-feature-90be6d?style=for-the-badge&labelColor=90be6d) | ![nitpick-style](https://img.shields.io/badge/nitpick-style,non--blocking-001219?style=for-the-badge&labelColor=94d2bd) | ![suggestion-performance](https://img.shields.io/badge/suggestion-performance-bb3e03?style=for-the-badge&labelColor=277da1) | ![issue-security](https://img.shields.io/badge/issue-security,blocking-9b2226?style=for-the-badge&labelColor=f9c74f) |
+| ![todo-test](https://img.shields.io/badge/todo-test-0a9396?style=for-the-badge&labelColor=e9d8a6) | ![question-ux](https://img.shields.io/badge/question-ux-94d2bd?style=for-the-badge&labelColor=005f73) | ![thought-refactor](https://img.shields.io/badge/thought-refactor-005f73?style=for-the-badge&labelColor=0a9396) | ![chore-docs](https://img.shields.io/badge/chore-documentation-577590?style=for-the-badge&labelColor=ca6702) |
+| ![note-security](https://img.shields.io/badge/note-security-9b2226?style=for-the-badge&labelColor=001219) | ![typo-docs](https://img.shields.io/badge/typo-documentation-577590?style=for-the-badge&labelColor=f8961e) | ![polish-ux](https://img.shields.io/badge/polish-ux-94d2bd?style=for-the-badge&labelColor=94d2bd) | ![quibble-style](https://img.shields.io/badge/quibble-style-001219?style=for-the-badge&labelColor=94d2bd) |
+
 ### Available Decorations
 
 Common decorations for additional context:
@@ -213,42 +231,6 @@ Common decorations for additional context:
 - **review**
 - **approved**
 - **rejected**
-
-## URL Encoding
-
-The library automatically handles URL encoding according to Shields.io specifications:
-
-- Spaces (` `) → Underscores (`_`)
-- Underscores (`_`) → Double underscores (`__`)
-- Dashes (`-`) → Double dashes (`--`)
-
-## Supported Colors
-
-The library supports all color formats accepted by Shields.io:
-
-- **Hex**: `#f94144`, `f94144`
-- **RGB**: `rgb(249, 65, 68)`
-- **RGBA**: `rgba(249, 65, 68, 0.8)`
-- **HSL**: `hsl(359, 95%, 62%)`
-- **HSLA**: `hsla(359, 95%, 62%, 0.8)`
-- **CSS Named Colors**: `red`, `blue`, `green`, `yellow`, etc.
-
-## Development
-
-### Project Structure
-
-```sh
-src/
-├── index.ts              # Main library implementation
-└── config/
-    └── palette.json      # Color palette configuration
-
-scripts/
-└── generate-badge-examples.js  # Example generator
-
-examples/
-└── badge-examples.md     # Generated badge examples
-```
 
 ## License
 

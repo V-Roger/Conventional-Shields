@@ -65,7 +65,7 @@ const nonBlockingIssue = generateIssueBadge(['ux', 'non-blocking']);
 const customBadge = generateConventionalShield({
   label: 'thought',
   decorations: ['performance', 'non-blocking'],
-  style: 'flat-square',
+  style: 'flat-square', // Override default 'for-the-badge' style
   logo: 'lightbulb'
 });
 ```
@@ -75,6 +75,8 @@ const customBadge = generateConventionalShield({
 - **Message colors** are based on the first decoration (security, blocking, performance, etc.)
 - **No decorations**: Both label and message use the label's color
 - **Manual override**: Set `autoColor: false` to use custom colors
+
+**Default Style**: Conventional comment badges default to `'for-the-badge'` style for better visibility and prominence.
 
 ### Advanced Options
 

@@ -15,10 +15,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** non-blocking
 
-![praise](https://img.shields.io/badge/praise-non--blocking-90be6d?labelColor=90be6d)
+![praise](https://img.shields.io/badge/praise-non--blocking-90be6d?style=for-the-badge&labelColor=90be6d)
 
 ```markdown
-![praise](https://img.shields.io/badge/praise-non--blocking-90be6d?labelColor=90be6d)
+![praise](https://img.shields.io/badge/praise-non--blocking-90be6d?style=for-the-badge&labelColor=90be6d)
 ```
 
 ---
@@ -27,10 +27,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** style, non-blocking
 
-![nitpick](https://img.shields.io/badge/nitpick-style,non--blocking-e9d8a6?labelColor=277da1)
+![nitpick](https://img.shields.io/badge/nitpick-style,non--blocking-e9d8a6?style=for-the-badge&labelColor=277da1)
 
 ```markdown
-![nitpick](https://img.shields.io/badge/nitpick-style,non--blocking-e9d8a6?labelColor=277da1)
+![nitpick](https://img.shields.io/badge/nitpick-style,non--blocking-e9d8a6?style=for-the-badge&labelColor=277da1)
 ```
 
 ---
@@ -39,10 +39,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** performance
 
-![suggestion](https://img.shields.io/badge/suggestion-performance-f8961e?labelColor=577590)
+![suggestion](https://img.shields.io/badge/suggestion-performance-f8961e?style=for-the-badge&labelColor=577590)
 
 ```markdown
-![suggestion](https://img.shields.io/badge/suggestion-performance-f8961e?labelColor=577590)
+![suggestion](https://img.shields.io/badge/suggestion-performance-f8961e?style=for-the-badge&labelColor=577590)
 ```
 
 ---
@@ -51,10 +51,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** security, blocking
 
-![issue](https://img.shields.io/badge/issue-security,blocking-f94144?labelColor=f9c74f)
+![issue](https://img.shields.io/badge/issue-security,blocking-f94144?style=for-the-badge&labelColor=f9c74f)
 
 ```markdown
-![issue](https://img.shields.io/badge/issue-security,blocking-f94144?labelColor=f9c74f)
+![issue](https://img.shields.io/badge/issue-security,blocking-f94144?style=for-the-badge&labelColor=f9c74f)
 ```
 
 ---
@@ -63,10 +63,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** test
 
-![todo](https://img.shields.io/badge/todo-test-0a9396?labelColor=e9d8a6)
+![todo](https://img.shields.io/badge/todo-test-0a9396?style=for-the-badge&labelColor=e9d8a6)
 
 ```markdown
-![todo](https://img.shields.io/badge/todo-test-0a9396?labelColor=e9d8a6)
+![todo](https://img.shields.io/badge/todo-test-0a9396?style=for-the-badge&labelColor=e9d8a6)
 ```
 
 ---
@@ -75,10 +75,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** ux
 
-![question](https://img.shields.io/badge/question-ux-94d2bd?labelColor=005f73)
+![question](https://img.shields.io/badge/question-ux-94d2bd?style=for-the-badge&labelColor=005f73)
 
 ```markdown
-![question](https://img.shields.io/badge/question-ux-94d2bd?labelColor=005f73)
+![question](https://img.shields.io/badge/question-ux-94d2bd?style=for-the-badge&labelColor=005f73)
 ```
 
 ---
@@ -87,10 +87,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** non-blocking
 
-![thought](https://img.shields.io/badge/thought-non--blocking-90be6d?labelColor=0a9396)
+![thought](https://img.shields.io/badge/thought-non--blocking-90be6d?style=for-the-badge&labelColor=0a9396)
 
 ```markdown
-![thought](https://img.shields.io/badge/thought-non--blocking-90be6d?labelColor=0a9396)
+![thought](https://img.shields.io/badge/thought-non--blocking-90be6d?style=for-the-badge&labelColor=0a9396)
 ```
 
 ---
@@ -99,10 +99,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** documentation
 
-![chore](https://img.shields.io/badge/chore-documentation-577590?labelColor=ca6702)
+![chore](https://img.shields.io/badge/chore-documentation-577590?style=for-the-badge&labelColor=ca6702)
 
 ```markdown
-![chore](https://img.shields.io/badge/chore-documentation-577590?labelColor=ca6702)
+![chore](https://img.shields.io/badge/chore-documentation-577590?style=for-the-badge&labelColor=ca6702)
 ```
 
 ---
@@ -111,10 +111,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** non-blocking
 
-![note](https://img.shields.io/badge/note-non--blocking-90be6d?labelColor=94d2bd)
+![note](https://img.shields.io/badge/note-non--blocking-90be6d?style=for-the-badge&labelColor=94d2bd)
 
 ```markdown
-![note](https://img.shields.io/badge/note-non--blocking-90be6d?labelColor=94d2bd)
+![note](https://img.shields.io/badge/note-non--blocking-90be6d?style=for-the-badge&labelColor=94d2bd)
 ```
 
 ---
@@ -123,10 +123,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** style
 
-![typo](https://img.shields.io/badge/typo-style-e9d8a6?labelColor=f8961e)
+![typo](https://img.shields.io/badge/typo-style-e9d8a6?style=for-the-badge&labelColor=f8961e)
 
 ```markdown
-![typo](https://img.shields.io/badge/typo-style-e9d8a6?labelColor=f8961e)
+![typo](https://img.shields.io/badge/typo-style-e9d8a6?style=for-the-badge&labelColor=f8961e)
 ```
 
 ---
@@ -135,10 +135,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** ux
 
-![polish](https://img.shields.io/badge/polish-ux-94d2bd?labelColor=277da1)
+![polish](https://img.shields.io/badge/polish-ux-94d2bd?style=for-the-badge&labelColor=277da1)
 
 ```markdown
-![polish](https://img.shields.io/badge/polish-ux-94d2bd?labelColor=277da1)
+![polish](https://img.shields.io/badge/polish-ux-94d2bd?style=for-the-badge&labelColor=277da1)
 ```
 
 ---
@@ -147,10 +147,10 @@ Conventional comment badges automatically color both the label and message parts
 
 **Decorations:** style, non-blocking
 
-![quibble](https://img.shields.io/badge/quibble-style,non--blocking-e9d8a6?labelColor=277da1)
+![quibble](https://img.shields.io/badge/quibble-style,non--blocking-e9d8a6?style=for-the-badge&labelColor=277da1)
 
 ```markdown
-![quibble](https://img.shields.io/badge/quibble-style,non--blocking-e9d8a6?labelColor=277da1)
+![quibble](https://img.shields.io/badge/quibble-style,non--blocking-e9d8a6?style=for-the-badge&labelColor=277da1)
 ```
 
 ---
@@ -164,10 +164,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** suggestion
 **Decorations:** security, blocking
 
-![suggestion](https://img.shields.io/badge/suggestion-security,blocking-f94144?labelColor=577590)
+![suggestion](https://img.shields.io/badge/suggestion-security,blocking-f94144?style=for-the-badge&labelColor=577590)
 
 ```markdown
-![suggestion](https://img.shields.io/badge/suggestion-security,blocking-f94144?labelColor=577590)
+![suggestion](https://img.shields.io/badge/suggestion-security,blocking-f94144?style=for-the-badge&labelColor=577590)
 ```
 
 ---
@@ -177,10 +177,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** issue
 **Decorations:** ux, non-blocking
 
-![issue](https://img.shields.io/badge/issue-ux,non--blocking-94d2bd?labelColor=f9c74f)
+![issue](https://img.shields.io/badge/issue-ux,non--blocking-94d2bd?style=for-the-badge&labelColor=f9c74f)
 
 ```markdown
-![issue](https://img.shields.io/badge/issue-ux,non--blocking-94d2bd?labelColor=f9c74f)
+![issue](https://img.shields.io/badge/issue-ux,non--blocking-94d2bd?style=for-the-badge&labelColor=f9c74f)
 ```
 
 ---
@@ -190,10 +190,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** suggestion
 **Decorations:** test, if-minor
 
-![suggestion](https://img.shields.io/badge/suggestion-test,if--minor-0a9396?labelColor=577590)
+![suggestion](https://img.shields.io/badge/suggestion-test,if--minor-0a9396?style=for-the-badge&labelColor=577590)
 
 ```markdown
-![suggestion](https://img.shields.io/badge/suggestion-test,if--minor-0a9396?labelColor=577590)
+![suggestion](https://img.shields.io/badge/suggestion-test,if--minor-0a9396?style=for-the-badge&labelColor=577590)
 ```
 
 ---
@@ -203,10 +203,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** question
 **Decorations:** performance, non-blocking
 
-![question](https://img.shields.io/badge/question-performance,non--blocking-f8961e?labelColor=005f73)
+![question](https://img.shields.io/badge/question-performance,non--blocking-f8961e?style=for-the-badge&labelColor=005f73)
 
 ```markdown
-![question](https://img.shields.io/badge/question-performance,non--blocking-f8961e?labelColor=005f73)
+![question](https://img.shields.io/badge/question-performance,non--blocking-f8961e?style=for-the-badge&labelColor=005f73)
 ```
 
 ---
@@ -216,10 +216,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** todo
 **Decorations:** accessibility
 
-![todo](https://img.shields.io/badge/todo-accessibility-277da1?labelColor=e9d8a6)
+![todo](https://img.shields.io/badge/todo-accessibility-277da1?style=for-the-badge&labelColor=e9d8a6)
 
 ```markdown
-![todo](https://img.shields.io/badge/todo-accessibility-277da1?labelColor=e9d8a6)
+![todo](https://img.shields.io/badge/todo-accessibility-277da1?style=for-the-badge&labelColor=e9d8a6)
 ```
 
 ---
@@ -229,10 +229,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** praise
 **Decorations:** feature
 
-![praise](https://img.shields.io/badge/praise-feature-90be6d?labelColor=90be6d)
+![praise](https://img.shields.io/badge/praise-feature-90be6d?style=for-the-badge&labelColor=90be6d)
 
 ```markdown
-![praise](https://img.shields.io/badge/praise-feature-90be6d?labelColor=90be6d)
+![praise](https://img.shields.io/badge/praise-feature-90be6d?style=for-the-badge&labelColor=90be6d)
 ```
 
 ---
@@ -242,10 +242,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** thought
 **Decorations:** refactor
 
-![thought](https://img.shields.io/badge/thought-refactor-005f73?labelColor=0a9396)
+![thought](https://img.shields.io/badge/thought-refactor-005f73?style=for-the-badge&labelColor=0a9396)
 
 ```markdown
-![thought](https://img.shields.io/badge/thought-refactor-005f73?labelColor=0a9396)
+![thought](https://img.shields.io/badge/thought-refactor-005f73?style=for-the-badge&labelColor=0a9396)
 ```
 
 ---
@@ -255,10 +255,10 @@ Conventional comment badges automatically color both the label and message parts
 **Label:** chore
 **Decorations:** deprecated
 
-![chore](https://img.shields.io/badge/chore-deprecated-f8961e?labelColor=ca6702)
+![chore](https://img.shields.io/badge/chore-deprecated-f8961e?style=for-the-badge&labelColor=ca6702)
 
 ```markdown
-![chore](https://img.shields.io/badge/chore-deprecated-f8961e?labelColor=ca6702)
+![chore](https://img.shields.io/badge/chore-deprecated-f8961e?style=for-the-badge&labelColor=ca6702)
 ```
 
 ---
@@ -279,10 +279,10 @@ const customBadge = generateConventionalShield({
 
 **Manual colors:** Red message, Green label
 
-![manual](https://img.shields.io/badge/praise-security-ff0000?labelColor=00ff00)
+![manual](https://img.shields.io/badge/praise-security-ff0000?style=for-the-badge&labelColor=00ff00)
 
 ```markdown
-![manual](https://img.shields.io/badge/praise-security-ff0000?labelColor=00ff00)
+![manual](https://img.shields.io/badge/praise-security-ff0000?style=for-the-badge&labelColor=00ff00)
 ```
 
 ---
@@ -372,4 +372,4 @@ const customBadge = generateConventionalShield({
 
 ---
 
-*Generated on 2025-08-28T09:49:32.558Z*
+*Generated on 2025-08-28T09:52:25.188Z*

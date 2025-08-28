@@ -222,7 +222,7 @@ function generateConventionalShield(options: ConventionalShieldOptions): string 
     message,
     color,
     labelColor,
-    style: badgeOptions.style || 'flat'
+    style: badgeOptions.style || 'for-the-badge'
   });
 }
 

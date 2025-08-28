@@ -1,6 +1,6 @@
 {
   "name": "conventional-shields",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Conventional comments meets Shields.io",
   "main": "dist/index.js",
   "engines": {

@@ -1,0 +1,47 @@
+{
+  "name": "conventional-comments-shields-extension",
+  "version": "1.0.0",
+  "description": "Browser extension for adding conventional comment shields to GitHub PR reviews",
+  "main": "build.js",
+  "scripts": {
+    "build": "tsc && node build.js",
+    "build:tsc": "tsc",
+    "build:extension": "node build.js",
+    "dev": "tsc && node build.js && echo 'Extension built. Load the dist/ folder in chrome://extensions/ for development'",
+    "package": "tsc && node build.js && echo 'Extension packaged in dist/ directory'",
+    "watch": "tsc --watch",
+    "watch:full": "tsc && node build.js && echo 'Watching for changes...' && nodemon --watch . --ext ts,js,json,html,css --exec 'tsc && node build.js'",
+    "clean": "rm -rf dist/ temp/"
+  },
+  "keywords": [
+    "browser-extension",
+    "github",
+    "conventional-comments",
+    "code-review",
+    "badges",
+    "pull-request"
+  ],
+  "author": "Virgil ROGER <roger.virgil@gmail.com>",
+  "license": "CC-BY-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V-Roger/conventional-shields"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "nodemon": "^3.0.0"
+  },
+  "files": [
+    "manifest.json",
+    "content.js",
+    "styles.css",
+    "popup.html",
+    "popup.css",
+    "popup.js",
+    "build.js",
+    "README.md"
+  ]
+}

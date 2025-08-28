@@ -1,0 +1,113 @@
+/* Conventional Comments Shields Extension Styles */
+
+.conventional-shields-container {
+  flex: 1 0 100%;
+  margin-bottom: 16px;
+  margin-top: 48px;
+  padding: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+}
+
+.shield-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shield-preview {
+  position: absolute;
+  min-height: 48px;
+  padding: 8px;
+  background-color: #ffffff60;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  width: calc(100% - 24px);
+}
+
+.shield-preview-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  height: 32px;
+}
+
+.shield-type-selector {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  width: 100%;
+}
+
+.shield-type-selector select {
+  width: 50%;
+  border: none;
+  background-color: transparent;
+  color: #f6f8fa;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 32px;
+}
+
+.shield-actions {
+  position: relative;
+  top: 12px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.shield-actions button {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.insert-shield-btn {
+  background-color: #90be6d;
+  color: #001219;
+}
+
+.insert-shield-btn:hover {
+  background-color: #2a9134;
+}
+
+.insert-shield-btn:active {
+  background-color: #2a9134;
+}
+
+.discard-shield-btn {
+  background-color: #001219;
+  color: #f6f8fa;
+}
+
+.discard-shield-btn:hover {
+  background-color: #f6f8fa;
+  color: #001219;
+}
+
+.discard-shield-btn:active {
+  background-color: #001219;
+  color: #f6f8fa;
+}
+
+
+/* Dark mode support (GitHub's dark theme) */
+@media (prefers-color-scheme: dark) {
+  .shield-preview {
+    background-color: #0d111760;
+  }
+}

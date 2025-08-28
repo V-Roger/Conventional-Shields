@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conventional Comments Badges</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <h1>🎯 Conventional Comments</h1>
+      <p>Add structured shields to your GitHub PR reviews</p>
+    </header>
+
+    <main class="popup-content">
+      <section class="status-section">
+        <h2>Extension Status</h2>
+        <div class="status-indicator">
+          <span class="status-dot" id="statusDot"></span>
+          <span class="status-text" id="statusText">Checking...</span>
+        </div>
+      </section>
+
+      <section class="quick-shields">
+        <h2>Quick Shields</h2>
+        <div class="shield-grid">
+          <button class="quick-shield" data-type="praise">Praise</button>
+          <button class="quick-shield" data-type="suggestion">Suggestion</button>
+          <button class="quick-shield" data-type="issue">Issue</button>
+          <button class="quick-shield" data-type="question">Question</button>
+          <button class="quick-shield" data-type="todo">Todo</button>
+          <button class="quick-shield" data-type="nitpick">Nitpick</button>
+        </div>
+      </section>
+
+      <section class="usage-section">
+        <h2>How to Use</h2>
+        <ol class="usage-steps">
+          <li>Navigate to a GitHub Pull Request</li>
+          <li>Click "Add review comment" on any line</li>
+          <li>Use the badge selector above the comment box</li>
+          <li>Choose your comment type and decorations</li>
+          <li>Click "Insert Badge" to add it to your comment</li>
+        </ol>
+      </section>
+
+      <section class="examples-section">
+        <h2>Shield Examples</h2>
+        <div class="example-shields">
+          <div class="example-shield">
+            <img src="https://img.shields.io/badge/praise-90be6d?style=for-the-badge&labelColor=90be6d" alt="praise">
+            <span>Praise</span>
+          </div>
+          <div class="example-shield">
+            <img src="https://img.shields.io/badge/suggestion-performance-bb3e03?style=for-the-badge&labelColor=277da1" alt="suggestion">
+            <span>Suggestion</span>
+          </div>
+          <div class="example-shield">
+            <img src="https://img.shields.io/badge/issue-security,blocking-9b2226?style=for-the-badge&labelColor=f9c74f" alt="issue">
+            <span>Issue</span>
+          </div>
+          <div class="example-shield">
+            <img src="https://img.shields.io/badge/question-ux-94d2bd?style=for-the-badge&labelColor=005f73" alt="question">
+            <span>Question</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Settings</h2>
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="autoInsert" />
+            <span>Auto-insert badge at cursor position</span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="showPreview" checked />
+            <span>Show badge preview</span>
+          </label>
+        </div>
+      </section>
+    </main>
+
+    <footer class="popup-footer">
+      <p>Made with ❤️ for better code reviews</p>
+      <a href="https://conventionalcomments.org" target="_blank" class="footer-link">
+        Learn more about Conventional Comments
+      </a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "..",
+    "declaration": false,
+    "sourceMap": false,
+    "removeComments": true,
+    "noEmitOnError": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "allowJs": true,
+    "checkJs": false
+  },
+  "include": [
+    "content.ts",
+    "../index.ts",
+    "../config/palette.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "temp",
+    "build.js",
+    "*.js",
+    "*.css",
+    "*.html"
+  ],
+  "ts-node": {
+    "esm": true
+  }
+}

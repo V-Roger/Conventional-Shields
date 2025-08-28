@@ -1,20 +1,14 @@
 # Conventional Shields
 
-A TypeScript library for generating Shields.io badges with a focus on conventional comments and code review workflows.
+A TypeScript lib for generating [Shields.io](https://shields.io/) badges with a focus on [conventional comments](https://conventionalcomments.org/#labels) for better code review workflows.
 
 ## Features
 
-- 🎨 **Color Palette**: 20 carefully selected colors for consistent badge styling
-- 🏷️ **Badge Generator**: Full implementation of Shields.io static badge API
-- 💬 **Conventional Comments**: Complete support for [Conventional Comments](https://conventionalcomments.org/#labels) specification
+- 🎨 **Color Palette**: 16 pretty colors for consistent badge styling
+- 🏷️ **Badge Generator**: implementats the Shields.io static badge API
+- 💬 **Conventional Comments**: supports the [Conventional Comments](https://conventionalcomments.org/#labels) specifications
 - 🚀 **Convenience Functions**: Pre-built functions for common badge types and comment labels
-- 📝 **TypeScript Support**: Full type safety and IntelliSense support
-
-## Installation
-
-```bash
-npm install conventional-shields
-```
+- 🤖 **Raycast scripts**: for the MacOs users out there
 
 ## Usage
 
@@ -52,12 +46,12 @@ import {
   generateChoreBadge
 } from 'conventional-shields';
 
-// Basic conventional comment badges (with decorations)
-const praise = generatePraiseBadge(['non-blocking']);
+// Basic conventional comment badges
+const praise = generatePraiseBadge();
 const suggestion = generateSuggestionBadge(['performance']);
 const issue = generateIssueBadge(['security', 'blocking']);
 
-// With decorations
+// With multiple decorations
 const blockingSuggestion = generateSuggestionBadge(['security', 'blocking']);
 const nonBlockingIssue = generateIssueBadge(['ux', 'non-blocking']);
 
@@ -66,15 +60,15 @@ const customBadge = generateConventionalShield({
   label: 'thought',
   decorations: ['performance', 'non-blocking'],
   style: 'flat-square', // Override default 'for-the-badge' style
-  logo: 'lightbulb'
 });
 ```
 
 **Auto-Coloring**: Conventional comment badges automatically color both the label and message parts:
-- **Label colors** are based on the comment type (praise, suggestion, issue, etc.)
-- **Message colors** are based on the first decoration (security, blocking, performance, etc.)
-- **No decorations**: Both label and message use the label's color
-- **Manual override**: Set `autoColor: false` to use custom colors
+
+- Label colors are based on the comment type (praise, suggestion, issue, etc.)
+- Message colors are based on the first decoration (security, blocking, performance, etc.)
+- No decorations assign label's color  to both label and message
+- Manual override with `autoColor: false` allows custom colors usage
 
 **Default Style**: Conventional comment badges default to `'for-the-badge'` style for better visibility and prominence.
 
@@ -100,8 +94,6 @@ const advancedBadge = generateBadge({
 ## API Reference
 
 ### `generateBadge(options: BadgeOptions): string`
-
-Main function for generating badge URLs.
 
 #### BadgeOptions Interface
 
@@ -132,7 +124,7 @@ interface BadgeOptions {
 
 ### Color Palette
 
-The library includes a curated palette of 16 carefully selected colors for consistent badge styling:
+The library includes a carefully curated palette of 16 colors for consistent badge styling:
 
 ```typescript
 import { palette } from 'conventional-shields';
@@ -181,39 +173,6 @@ const praiseBadge = generatePraiseBadge(['non-blocking']); // Uses LightGreen
 const issueBadge = generateIssueBadge(['blocking']); // Uses Yellow
 ```
 
-## Examples
-
-### Conventional Comments Badges
-
-```typescript
-// Praise comment (auto-colored: LightGreen label, LightGreen message)
-const praiseBadge = generatePraiseBadge(['non-blocking']);
-
-// Suggestion with decorations (auto-colored: BlueGray label, Red message)
-const suggestionBadge = generateSuggestionBadge(['security', 'blocking']);
-
-// Issue with blocking decoration (auto-colored: Yellow label, Red message)
-const issueBadge = generateIssueBadge(['performance', 'blocking']);
-
-// Question for clarification (auto-colored: DarkBlue label, LightGreen message)
-const questionBadge = generateQuestionBadge(['non-blocking']);
-
-// Todo with test decoration (auto-colored: Cream label, Cyan message)
-const todoBadge = generateTodoBadge(['test']);
-
-// Chore with documentation decoration (auto-colored: DarkOrange label, BlueGray message)
-const choreBadge = generateChoreBadge(['documentation']);
-
-// Manual color override
-const customBadge = generateConventionalShield({
-  label: 'praise',
-  decorations: ['security'],
-  autoColor: false,
-  color: '#ff0000',
-  labelColor: '#00ff00'
-});
-```
-
 ### Available Labels
 
 The library supports all [Conventional Comments](https://conventionalcomments.org/#labels) labels:
@@ -228,7 +187,7 @@ The library supports all [Conventional Comments](https://conventionalcomments.or
 - **chore** - Simple tasks that must be done
 - **note** - Highlight something to take note of
 - **typo** - Misspellings
-- **polish** - Quality improvements
+- **polish** - nitpick-like quality improvements
 - **quibble** - Very much like nitpicks
 
 ### Available Decorations
@@ -237,53 +196,25 @@ Common decorations for additional context:
 
 - **non-blocking** - Should not prevent acceptance
 - **blocking** - Should prevent acceptance until resolved
-- **if-minor** - Should resolve only if changes are minor
-- **security** - Security-related comment
-- **test** - Test-related comment
-- **ux** - User experience related
-- **performance** - Performance related
-- **accessibility** - Accessibility related
-- **documentation** - Documentation related
-- **style** - Code style related
+- **if-minor** - Should resolve only if suggested changes turn out to be minor
+- **security**
+- **test**
+- **ux**
+- **performance**
+- **accessibility**
+- **documentation**
+- **style**
 - **refactor** - Refactoring suggestion
-- **bug** - Bug-related
-- **feature** - Feature-related
+- **bug**
+- **feature**
 - **breaking** - Breaking change
-- **deprecated** - Deprecation related
+- **deprecated**
 - **experimental** - Experimental feature
-- **wip** - Work in progress
-- **draft** - Draft status
-- **review** - Review related
-- **approved** - Approved status
-- **rejected** - Rejected status
-
-### Project Status Badges
-
-```typescript
-// Development status
-const devStatus = generateBadge({
-  label: 'status',
-  message: 'in development',
-  color: 'yellow',
-  logo: 'typescript'
-});
-
-// Documentation
-const docsBadge = generateBadge({
-  label: 'docs',
-  message: 'available',
-  color: 'blue',
-  logo: 'readthedocs'
-});
-
-// Tests
-const testBadge = generateBadge({
-  label: 'tests',
-  message: '100%',
-  color: 'brightgreen',
-  logo: 'jest'
-});
-```
+- **wip** - Work In Progress
+- **draft**
+- **review**
+- **approved**
+- **rejected**
 
 ## URL Encoding
 
@@ -306,25 +237,9 @@ The library supports all color formats accepted by Shields.io:
 
 ## Development
 
-### Building
-
-```bash
-# Install dependencies
-npm install
-
-# Build the project
-npm run build
-
-# Run in development mode (watch for changes)
-npm run dev
-
-# Generate badge examples
-npm run generate-examples
-```
-
 ### Project Structure
 
-```
+```sh
 src/
 ├── index.ts              # Main library implementation
 └── config/
@@ -344,4 +259,3 @@ CC-BY-SA-4.0
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-

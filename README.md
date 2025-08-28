@@ -16,45 +16,7 @@ A TypeScript library for generating Shields.io badges with a focus on convention
 npm install conventional-shields
 ```
 
-### CLI Installation
-
-For global CLI access:
-
-```bash
-npm install -g conventional-shields
-```
-
-Or use with npx:
-
-```bash
-npx conventional-shields <command>
-```
-
 ## Usage
-
-### CLI Usage
-
-Generate badges directly from the command line:
-
-```bash
-# Generate a praise badge
-conventional-shields generate praise "Beautiful test!"
-
-# Generate a suggestion badge with decorations
-conventional-shields generate suggestion "Use better variable names" style non-blocking
-
-# Generate a blocking issue badge
-conventional-shields generate issue "Memory leak detected" performance blocking
-
-# List all available labels and decorations
-conventional-shields list
-
-# Show available colors
-conventional-shields palette
-
-# Show usage examples
-conventional-shields examples
-```
 
 ### Programmatic Usage
 
@@ -90,26 +52,18 @@ import {
   generateChoreBadge
 } from 'conventional-shields';
 
-// Basic conventional comment badges
-const praise = generatePraiseBadge('Beautiful test!');
-const suggestion = generateSuggestionBadge('Consider using a more descriptive variable name');
-const issue = generateIssueBadge('This could cause a memory leak');
+// Basic conventional comment badges (with decorations)
+const praise = generatePraiseBadge(['non-blocking']);
+const suggestion = generateSuggestionBadge(['performance']);
+const issue = generateIssueBadge(['security', 'blocking']);
 
 // With decorations
-const blockingSuggestion = generateSuggestionBadge(
-  'Implement proper input validation',
-  ['security', 'blocking']
-);
+const blockingSuggestion = generateSuggestionBadge(['security', 'blocking']);
+const nonBlockingIssue = generateIssueBadge(['ux', 'non-blocking']);
 
-const nonBlockingIssue = generateIssueBadge(
-  'Button color could be improved',
-  ['ux', 'non-blocking']
-);
-
-// Advanced usage
+// Advanced usage with custom options
 const customBadge = generateConventionalShield({
   label: 'thought',
-  subject: 'This could lead to more focused initiatives',
   decorations: ['performance', 'non-blocking'],
   style: 'flat-square',
   logo: 'lightbulb'
@@ -161,12 +115,12 @@ interface BadgeOptions {
 ### Conventional Comments Functions
 
 - `generateConventionalShield(options: ConventionalShieldOptions): string` - Main function for conventional comment badges
-- `generatePraiseBadge(subject: string, decorations?: ConventionalDecoration[]): string`
-- `generateSuggestionBadge(subject: string, decorations?: ConventionalDecoration[]): string`
-- `generateIssueBadge(subject: string, decorations?: ConventionalDecoration[]): string`
-- `generateQuestionBadge(subject: string, decorations?: ConventionalDecoration[]): string`
-- `generateTodoBadge(subject: string, decorations?: ConventionalDecoration[]): string`
-- `generateChoreBadge(subject: string, decorations?: ConventionalDecoration[]): string`
+- `generatePraiseBadge(decorations?: ConventionalDecoration[]): string`
+- `generateSuggestionBadge(decorations?: ConventionalDecoration[]): string`
+- `generateIssueBadge(decorations?: ConventionalDecoration[]): string`
+- `generateQuestionBadge(decorations?: ConventionalDecoration[]): string`
+- `generateTodoBadge(decorations?: ConventionalDecoration[]): string`
+- `generateChoreBadge(decorations?: ConventionalDecoration[]): string`
 
 ### Color Palette
 
@@ -187,31 +141,22 @@ import { palette } from 'conventional-shields';
 
 ```typescript
 // Praise comment
-const praiseBadge = generatePraiseBadge('Excellent error handling!');
+const praiseBadge = generatePraiseBadge(['non-blocking']);
 
 // Suggestion with decorations
-const suggestionBadge = generateSuggestionBadge(
-  'Consider using a more descriptive variable name',
-  ['style', 'non-blocking']
-);
+const suggestionBadge = generateSuggestionBadge(['style', 'non-blocking']);
 
 // Issue with blocking decoration
-const issueBadge = generateIssueBadge(
-  'This could cause a memory leak',
-  ['performance', 'blocking']
-);
+const issueBadge = generateIssueBadge(['performance', 'blocking']);
 
 // Question for clarification
-const questionBadge = generateQuestionBadge(
-  'Why are we using this specific algorithm?',
-  ['non-blocking']
-);
+const questionBadge = generateQuestionBadge(['non-blocking']);
 
 // Todo with test decoration
-const todoBadge = generateTodoBadge(
-  'Add unit tests for this function',
-  ['test']
-);
+const todoBadge = generateTodoBadge(['test']);
+
+// Chore with documentation decoration
+const choreBadge = generateChoreBadge(['documentation']);
 ```
 
 ### Available Labels
@@ -245,6 +190,17 @@ Common decorations for additional context:
 - **accessibility** - Accessibility related
 - **documentation** - Documentation related
 - **style** - Code style related
+- **refactor** - Refactoring suggestion
+- **bug** - Bug-related
+- **feature** - Feature-related
+- **breaking** - Breaking change
+- **deprecated** - Deprecation related
+- **experimental** - Experimental feature
+- **wip** - Work in progress
+- **draft** - Draft status
+- **review** - Review related
+- **approved** - Approved status
+- **rejected** - Rejected status
 
 ### Project Status Badges
 
@@ -307,21 +263,24 @@ npm run build
 # Run in development mode (watch for changes)
 npm run dev
 
-# Test the CLI
-npm run cli generate praise "Test badge"
-
-# Run examples
-npm run test
+# Generate badge examples
+npm run generate-examples
 ```
 
-### CLI Development
+### Project Structure
 
-The CLI is built with Node.js and provides the following commands:
+```
+src/
+├── index.ts              # Main library implementation
+└── config/
+    └── palette.json      # Color palette configuration
 
-- `generate <label> <subject> [decorations...]` - Generate a single badge
-- `list` - List all available labels and decorations
-- `palette` - Show available colors
-- `examples` - Show usage examples
+scripts/
+└── generate-badge-examples.js  # Example generator
+
+examples/
+└── badge-examples.md     # Generated badge examples
+```
 
 ## License
 

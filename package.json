@@ -30,7 +30,6 @@
     "typescript": "^5.9.2"
   },
   "files": [
-    "dist/",
-    "bin/"
+    "dist/"
   ]
 }

@@ -14,18 +14,6 @@
   gap: 12px;
 }
 
-.shield-preview {
-  position: absolute;
-  min-height: 48px;
-  padding: 8px;
-  background-color: #ffffff60;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-  width: calc(100% - 24px);
-}
-
 .shield-preview-content {
   display: flex;
   align-items: center;
@@ -44,16 +32,51 @@
   width: 100%;
 }
 
-.shield-type-selector select {
-  width: 50%;
-  border: none;
+select {
   background-color: transparent;
   color: #f6f8fa;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  border: none;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
   height: 32px;
+  padding: 4px 8px;
+  z-index: 100;
+  outline: none;
+  caret-color: #f6f8fa;
+}
+
+.shield-select--wrapper {
+  position: absolute;
+  min-height: 48px;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  width: calc(100% - 24px);
+}
+
+.shield-select--wrapper:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #001219;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 4px;
 }
 
 .shield-actions {
@@ -104,10 +127,13 @@
   color: #f6f8fa;
 }
 
-
 /* Dark mode support (GitHub's dark theme) */
 @media (prefers-color-scheme: dark) {
-  .shield-preview {
-    background-color: #0d111760;
+  .conventional-shields-container {
+    color: #f6f8fa;
+  }
+
+  select * {
+    color: #001219;
   }
 }

@@ -168,7 +168,7 @@ class ConventionalShields {
     container.innerHTML = `
       <div class="shield-selector">
         <div class="shield-type-selector">
-          <div class="shield-preview">
+          <div class="shield-select--wrapper">
             <select class="shield-type" name="shield-type" aria-label="Shield type">
               ${this.badgeTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
             </select>

@@ -205,7 +205,11 @@ class ConventionalShields {
 
       if (selectedType) {
         const shieldUrl = this.generateBadge(selectedType, [selectedDecorations]);
-        previewContent.innerHTML = `<img src="${shieldUrl}" alt="${selectedType} shield" style="height: 20px;">`;
+        const img = document.createElement('img');
+        img.src = shieldUrl;
+        img.alt = `${selectedType} shield`;
+        previewContent.innerHTML = '';
+        previewContent.appendChild(img);
       } else {
         previewContent.innerHTML = '';
       }

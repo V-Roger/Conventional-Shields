@@ -127,6 +127,8 @@ select {
   color: #f6f8fa;
 }
 
+
+
 /* Dark mode support (GitHub's dark theme) */
 @media (prefers-color-scheme: dark) {
   .conventional-shields-container {

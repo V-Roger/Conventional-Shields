@@ -7,9 +7,18 @@
     "activeTab",
     "storage"
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["https://github.com/*"]
+    }
+  ],
   "host_permissions": [
     "https://github.com/*"
   ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: blob: https://img.shields.io;"
+  },
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],

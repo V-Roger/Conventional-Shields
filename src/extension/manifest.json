@@ -1,8 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Conventional Shields for GitHub",
-  "id": "conventional-shields-for-github",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Add conventional comment shields to GitHub PR review comments",
   "permissions": [
     "activeTab",
@@ -13,7 +12,7 @@
       "id": "{c74e2ea6-9cc0-4927-9901-44efc9c47548}"
     }
   },
-  "bro_accessible_resources": [
+  "web_accessible_resources": [
     {
       "resources": ["icons/*"],
       "matches": ["https://github.com/*"]

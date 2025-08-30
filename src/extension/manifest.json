@@ -8,7 +8,12 @@
     "activeTab",
     "storage"
   ],
-  "web_accessible_resources": [
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{c74e2ea6-9cc0-4927-9901-44efc9c47548}"
+    }
+  },
+  "bro_accessible_resources": [
     {
       "resources": ["icons/*"],
       "matches": ["https://github.com/*"]

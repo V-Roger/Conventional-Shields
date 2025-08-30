@@ -165,28 +165,85 @@ class ConventionalShields {
   createBadgeSelector() {
     const container = document.createElement('div');
     container.className = 'conventional-shields-container';
-    container.innerHTML = `
-      <div class="shield-selector">
-        <div class="shield-type-selector">
-          <div class="shield-select--wrapper">
-            <select class="shield-type" name="shield-type" aria-label="Shield type">
-              ${this.badgeTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
-            </select>
-            <select class="shield-decorations" name="shield-decorations" aria-label="Shield decorations">
-              <option value="">None</option>
-              ${this.decorations.map(dec => `<option value="${dec}">${dec}</option>`).join('')}
-            </select>
-          </div>
-        </div>
-        <div class="shield-actions">
-          <div class="shield-preview-content"></div>
-          <div>
-            <button type="button" class="discard-shield-btn">Discard</button>
-            <button type="button" class="insert-shield-btn">OK</button>
-          </div>
-        </div>
-      </div>
-    `;
+
+    // Create the shield selector structure using DOM methods instead of innerHTML
+    const shieldSelector = document.createElement('div');
+    shieldSelector.className = 'shield-selector';
+
+    const shieldTypeSelector = document.createElement('div');
+    shieldTypeSelector.className = 'shield-type-selector';
+
+    const shieldSelectWrapper = document.createElement('div');
+    shieldSelectWrapper.className = 'shield-select--wrapper';
+
+    // Create type select
+    const typeSelect = document.createElement('select');
+    typeSelect.className = 'shield-type';
+    typeSelect.name = 'shield-type';
+    typeSelect.setAttribute('aria-label', 'Shield type');
+
+    // Add options to type select
+    this.badgeTypes.forEach(type => {
+      const option = document.createElement('option');
+      option.value = type;
+      option.textContent = type;
+      typeSelect.appendChild(option);
+    });
+
+    // Create decoration select
+    const decorationSelect = document.createElement('select');
+    decorationSelect.className = 'shield-decorations';
+    decorationSelect.name = 'shield-decorations';
+    decorationSelect.setAttribute('aria-label', 'Shield decorations');
+
+    // Add "None" option
+    const noneOption = document.createElement('option');
+    noneOption.value = '';
+    noneOption.textContent = 'None';
+    decorationSelect.appendChild(noneOption);
+
+    // Add decoration options
+    this.decorations.forEach(dec => {
+      const option = document.createElement('option');
+      option.value = dec;
+      option.textContent = dec;
+      decorationSelect.appendChild(option);
+    });
+
+    // Assemble the type selector
+    shieldSelectWrapper.appendChild(typeSelect);
+    shieldSelectWrapper.appendChild(decorationSelect);
+    shieldTypeSelector.appendChild(shieldSelectWrapper);
+
+    // Create shield actions
+    const shieldActions = document.createElement('div');
+    shieldActions.className = 'shield-actions';
+
+    const previewContent = document.createElement('div');
+    previewContent.className = 'shield-preview-content';
+
+    const actionButtons = document.createElement('div');
+
+    const discardBtn = document.createElement('button');
+    discardBtn.type = 'button';
+    discardBtn.className = 'discard-shield-btn';
+    discardBtn.textContent = 'Discard';
+
+    const insertBtn = document.createElement('button');
+    insertBtn.type = 'button';
+    insertBtn.className = 'insert-shield-btn';
+    insertBtn.textContent = 'OK';
+
+    actionButtons.appendChild(discardBtn);
+    actionButtons.appendChild(insertBtn);
+
+    shieldActions.appendChild(previewContent);
+    shieldActions.appendChild(actionButtons);
+
+    // Assemble everything
+    shieldSelector.appendChild(shieldTypeSelector);
+    shieldSelector.appendChild(shieldActions);
+    container.appendChild(shieldSelector);
 
     return container;
   }
@@ -208,10 +265,17 @@ class ConventionalShields {
         const img = document.createElement('img');
         img.src = shieldUrl;
         img.alt = `${selectedType} shield`;
-        previewContent.innerHTML = '';
+
+        // Clear preview content safely
+        while (previewContent.firstChild) {
+          previewContent.removeChild(previewContent.firstChild);
+        }
         previewContent.appendChild(img);
       } else {
-        previewContent.innerHTML = '';
+        // Clear preview content safely
+        while (previewContent.firstChild) {
+          previewContent.removeChild(previewContent.firstChild);
+        }
       }
     };
 
@@ -227,7 +291,12 @@ class ConventionalShields {
     discardBtn.addEventListener('click', () => {
       typeSelect.value = '';
       decorationSelect.value = '';
-      previewContent.innerHTML = '';
+
+      // Clear preview content safely
+      while (previewContent.firstChild) {
+        previewContent.removeChild(previewContent.firstChild);
+      }
+
       container.remove();
     });
   }

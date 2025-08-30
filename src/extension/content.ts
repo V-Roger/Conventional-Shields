@@ -265,22 +265,3 @@ class ConventionalShields {
 
 // Initialize the extension
 const extension = new ConventionalShields();
-
-// Listen for messages from popup
-if (typeof window.chrome !== 'undefined' && window.chrome?.runtime) {
-  window.chrome.runtime.onMessage.addListener((message: any, sender: any, sendResponse: any) => {
-    if (message.action === 'insertQuickShield') {
-      // Find the active textarea (focused comment form)
-      const activeTextarea = document.querySelector('textarea:focus') as BadgeTextarea | null;
-      if (activeTextarea) {
-        extension.insertBadgeIntoTextarea(activeTextarea, message.shieldType);
-      } else {
-        // If no textarea is focused, find the first available one
-        const firstTextarea = document.querySelector('.js-comment-form textarea, .js-new-comment-form textarea, .js-inline-comment-form textarea') as BadgeTextarea | null;
-        if (firstTextarea) {
-          extension.insertBadgeIntoTextarea(firstTextarea, message.shieldType);
-        }
-      }
-    }
-  });
-}

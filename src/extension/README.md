@@ -1,4 +1,4 @@
-# Conventional Comments Badges Browser Extension
+# Conventional Shields for GitHub
 
 A browser extension that adds conventional comment badges to GitHub Pull Request review comments, making code reviews more structured and visually appealing.
 
@@ -7,7 +7,7 @@ A browser extension that adds conventional comment badges to GitHub Pull Request
 - 🎯 **Conventional Comments Support**: All 12 conventional comment types (praise, suggestion, issue, etc.)
 - 🏷️ **Decoration Tags**: 21 different decoration tags for additional context
 - 👀 **Live Preview**: See how your badge will look before inserting
-- ⚡ **Quick Badges**: One-click insertion of common badge types
+- ⚡ **Seamless Integration**: Automatically appears in GitHub PR comment forms
 - 🎨 **GitHub Integration**: Seamlessly integrates with GitHub's comment interface
 - 🌙 **Dark Mode Support**: Works with GitHub's dark theme
 - 📱 **Responsive Design**: Works on desktop and mobile browsers
@@ -16,37 +16,46 @@ A browser extension that adds conventional comment badges to GitHub Pull Request
 
 ### Chrome/Edge/Brave
 
-1. **Download the Extension**
+1. **Build the Extension**
 
    ```bash
    # Clone or download this repository
    git clone <repository-url>
-   cd Conventional-Shields/extension
+   cd Conventional-Shields
+   
+   # Install dependencies
+   pnpm install
+   
+   # Build the extension
+   pnpm run build:extension
    ```
 
 2. **Load Extension in Chrome**
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top right)
    - Click "Load unpacked"
-   - Select the `extension` folder from this repository
+   - Select the `src/extension/dist/` folder from this repository
 
 3. **Verify Installation**
-   - You should see "Conventional Comments Badges" in your extensions list
+   - You should see "Conventional Shields for GitHub" in your extensions list
    - The extension icon should appear in your browser toolbar
 
 ### Firefox
 
 1. **Package the Extension**
-2. 
+   
    ```bash
    # Install web-ext if you haven't already
    npm install -g web-ext
+   
+   # Navigate to the extension directory
+   cd src/extension/dist
    
    # Build the extension
    web-ext build
    ```
 
-3. **Install in Firefox**
+2. **Install in Firefox**
    - Go to `about:debugging#/runtime/this-firefox`
    - Click "Load Temporary Add-on"
    - Select the `.zip` file created by web-ext
@@ -65,26 +74,15 @@ A browser extension that adds conventional comment badges to GitHub Pull Request
    - Or click "Add review comment" at the bottom
 
 3. **Use the Badge Selector**
-   - You'll see a new "Conventional Comments Badges" section above the comment box
+   - You'll see a new "Conventional Shields" section above the comment box
    - Select your comment type (praise, suggestion, issue, etc.)
    - Choose relevant decorations (non-blocking, security, performance, etc.)
    - Preview your badge in real-time
-   - Click "Insert Badge" to add it to your comment
+   - Click "OK" to add it to your comment
 
 4. **Complete Your Comment**
    - Add your detailed comment text
    - Submit the review comment
-
-### Quick Badges
-
-1. **Open the Extension Popup**
-   - Click the extension icon in your browser toolbar
-   - You'll see a popup with quick badge options
-
-2. **Insert Quick Badges**
-   - Click any quick badge button (Praise, Suggestion, Issue, etc.)
-   - The badge will be automatically inserted into the active comment form
-   - Perfect for common comment types
 
 ### Badge Types
 
@@ -144,12 +142,58 @@ Common decorations for additional context:
 ![question-ux](https://img.shields.io/badge/question-ux-94d2bd?style=for-the-badge&labelColor=005f73)
 ```
 
-## Settings
+## Development
 
-Access settings through the extension popup:
+### Project Structure
+```
+src/extension/
+├── manifest.json          # Extension configuration
+├── content.ts            # Main content script
+├── styles.css            # Styles for badge selector
+├── build.js              # Build script
+├── package.json          # Extension dependencies
+├── tsconfig.json         # TypeScript configuration
+├── icons/                # Extension icons
+└── README.md             # This file
+```
 
-- **Auto-insert badge at cursor position**: Automatically place badges at the current cursor position
-- **Show badge preview**: Display a live preview of the selected badge
+### Building for Development
+
+1. **Install Dependencies**
+   ```bash
+   cd src/extension
+   npm install
+   ```
+
+2. **Build the Extension**
+   ```bash
+   npm run build
+   ```
+
+3. **Development Mode**
+   ```bash
+   npm run dev
+   ```
+
+4. **Watch Mode**
+   ```bash
+   npm run watch:full
+   ```
+
+### Building for Distribution
+
+1. **Create Icons**
+   - Add icon files to the `icons/` directory
+   - See `icons/README.md` for requirements
+
+2. **Test the Extension**
+   - Load in browser and test all features
+   - Test on different GitHub pages
+
+3. **Package for Chrome Web Store**
+   - Run `npm run package`
+   - Zip the `dist/` folder
+   - Submit to Chrome Web Store
 
 ## Troubleshooting
 
@@ -164,8 +208,9 @@ Access settings through the extension popup:
    - Try refreshing the GitHub page
 
 3. **Check Extension Status**
-   - Click the extension icon to see the status
-   - Should show "Active on Pull Request" when working
+   - Go to `chrome://extensions/`
+   - Make sure the extension is enabled
+   - Check for any error messages
 
 4. **Reinstall Extension**
    - Go to `chrome://extensions/`
@@ -176,7 +221,7 @@ Access settings through the extension popup:
 
 1. **Check Comment Form**
    - Make sure you're in a comment form (not a regular text area)
-   - Look for the "Conventional Comments Badges" section above the text area
+   - Look for the "Conventional Shields" section above the text area
 
 2. **Check Console for Errors**
    - Open Developer Tools (F12)
@@ -192,36 +237,7 @@ Access settings through the extension popup:
    - The interface adapts to smaller screens
    - Some features may be more compact on mobile
 
-## Development
-
-### Project Structure
-```
-extension/
-├── manifest.json          # Extension configuration
-├── content.js            # Main content script
-├── styles.css            # Styles for badge selector
-├── popup.html            # Extension popup interface
-├── popup.css             # Popup styles
-├── popup.js              # Popup functionality
-├── icons/                # Extension icons
-└── README.md             # This file
-```
-
-### Building for Distribution
-
-1. **Create Icons**
-   - Add icon files to the `icons/` directory
-   - See `icons/README.md` for requirements
-
-2. **Test the Extension**
-   - Load in browser and test all features
-   - Test on different GitHub pages
-
-3. **Package for Chrome Web Store**
-   - Zip the extension folder
-   - Submit to Chrome Web Store
-
-### Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch

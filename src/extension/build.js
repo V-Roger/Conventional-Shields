@@ -67,9 +67,6 @@ class ExtensionBuilder {
     const staticFiles = [
       'manifest.json',
       'styles.css',
-      'popup.html',
-      'popup.css',
-      'popup.js'
     ];
 
     staticFiles.forEach(file => {

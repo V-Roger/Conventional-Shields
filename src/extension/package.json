@@ -38,9 +38,6 @@
     "manifest.json",
     "content.js",
     "styles.css",
-    "popup.html",
-    "popup.css",
-    "popup.js",
     "build.js",
     "README.md"
   ]

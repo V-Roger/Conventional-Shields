@@ -315,16 +315,8 @@ class ConventionalShieldsExtension {
         typeSelect.value = '';
         decorationSelect.value = '';
 
-        // Clear preview content safely
-        while (previewContent.firstChild) {
-          previewContent.removeChild(previewContent.firstChild);
-        }
-
         // Remove the container
         container.remove();
-
-        // Clean up the form from enhancedForms
-        this.enhancedForms.delete(form);
       } catch (error) {
         console.error('Failed to discard badge:', error);
       }

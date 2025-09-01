@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Conventional Shields for GitHub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Add conventional comment shields to GitHub PR review comments",
   "permissions": [
     "activeTab",

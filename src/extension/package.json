@@ -1,6 +1,6 @@
 {
   "name": "conventional-comments-shields-extension",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Browser extension for adding conventional comment shields to GitHub PR reviews",
   "main": "dist/index.js",
   "scripts": {

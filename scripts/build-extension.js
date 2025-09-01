@@ -17,11 +17,11 @@ try {
 
   // Install dependencies if needed
   console.log('📦 Installing dependencies...');
-  execSync('npm install', { stdio: 'inherit' });
+  execSync('pnpm install', { stdio: 'inherit' });
 
   // Build the extension
   console.log('🔧 Building extension...');
-  execSync('npm run build', { stdio: 'inherit' });
+  execSync('pnpm run build', { stdio: 'inherit' });
 
   console.log('✅ Extension build completed successfully!');
   console.log(`📁 Extension files: ${extensionDir}/dist/`);

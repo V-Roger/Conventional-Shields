@@ -1,4 +1,5 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
@@ -8,9 +9,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDir": "..",
-    "declaration": false,
-    "sourceMap": false,
+    "rootDir": ".",
+    "declaration": true,
+    "sourceMap": true,
     "removeComments": true,
     "noEmitOnError": true,
     "allowSyntheticDefaultImports": true,
@@ -18,23 +19,24 @@
     "isolatedModules": true,
     "noEmit": false,
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "baseUrl": ".",
+    "lib": ["ES2020", "DOM", "WebWorker"],
+    "types": [],
+    "typeRoots": []
   },
   "include": [
     "content.ts",
-    "../index.ts",
-    "../config/palette.json"
+    "manifest.json",
+    "styles.css",
+    "./lib/index.js",
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "temp",
-    "build.js",
-    "*.js",
-    "*.css",
-    "*.html"
+    "**/*.d.ts"
   ],
   "ts-node": {
-    "esm": true
+    "esm": false
   }
 }

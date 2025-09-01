@@ -22,12 +22,13 @@
     "noUnusedParameters": false
   },
   "include": [
-    "src/**/*"
+    "./src/index.ts",
+    "./src/config/**/*.json"
   ],
   "exclude": [
     "node_modules",
     "dist",
     "examples",
-    "bin"
+    "extension"
   ]
 }

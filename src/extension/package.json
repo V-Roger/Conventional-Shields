@@ -1,17 +1,15 @@
 {
   "name": "conventional-comments-shields-extension",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Browser extension for adding conventional comment shields to GitHub PR reviews",
-  "main": "build.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && node build.js",
-    "build:tsc": "tsc",
-    "build:extension": "node build.js",
-    "dev": "tsc && node build.js && echo 'Extension built. Load the dist/ folder in chrome://extensions/ for development'",
-    "package": "tsc && node build.js && echo 'Extension packaged in dist/ directory'",
-    "watch": "tsc --watch",
-    "watch:full": "tsc && node build.js && echo 'Watching for changes...' && nodemon --watch . --ext ts,js,json,html,css --exec 'tsc && node build.js'",
-    "clean": "rm -rf dist/ temp/"
+    "build": "tsc",
+    "build:bundle": "tsc && node ../../scripts/build-extension-bundled.js",
+    "postbuild": "cp styles.css dist/ && cp -r icons dist/",
+    "package": "tsc && cd ./dist && web-ext build --overwrite-dest",
+    "package:bundle": "pnpm run build:bundle && cd ./dist && web-ext build --overwrite-dest",
+    "watch": "tsc --watch"
   },
   "keywords": [
     "browser-extension",
@@ -19,6 +17,8 @@
     "conventional-comments",
     "code-review",
     "badges",
+    "shields",
+    "shields.io",
     "pull-request"
   ],
   "author": "Virgil ROGER <roger.virgil@gmail.com>",
@@ -28,17 +28,12 @@
     "url": "https://github.com/V-Roger/conventional-shields"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=24.0.0"
   },
   "devDependencies": {
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.0.0",
     "typescript": "^5.9.2",
-    "nodemon": "^3.0.0"
-  },
-  "files": [
-    "manifest.json",
-    "content.js",
-    "styles.css",
-    "build.js",
-    "README.md"
-  ]
+    "web-ext": "^7.4.0"
+  }
 }

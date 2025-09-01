@@ -57,6 +57,45 @@ type ConventionalDecoration =
   | 'rejected';     // Rejected status
 
 
+const availableLabels: ConventionalLabel[] = [
+  'praise',
+  'nitpick',
+  'suggestion',
+  'issue',
+  'todo',
+  'question',
+  'thought',
+  'chore',
+  'note',
+  'typo',
+  'polish',
+  'quibble'
+];
+
+const availableDecorations: ConventionalDecoration[] = [
+  'non-blocking',
+  'blocking',
+  'if-minor',
+  'security',
+  'test',
+  'ux',
+  'performance',
+  'accessibility',
+  'documentation',
+  'style',
+  'refactor',
+  'bug',
+  'feature',
+  'breaking',
+  'deprecated',
+  'experimental',
+  'wip',
+  'draft',
+  'review',
+  'approved',
+  'rejected'
+];
+
 // Create color LUT from config palette
 const colorLUT: Record<string, string> = {};
 palette.colors.forEach(color => {
@@ -282,6 +321,8 @@ export {
   generateTodoBadge,
   generateChoreBadge,
   palette,
+  availableLabels,
+  availableDecorations,
   type BadgeOptions,
   type BadgeStyle,
   type ConventionalLabel,

@@ -1,19 +1,17 @@
-// Conventional Comments Shields Extension
-// Content script for GitHub PR review comments
+import * as ConventionalShields from './lib/index.js';
 
-import { generateConventionalShield, type ConventionalLabel, type ConventionalDecoration } from '../index';
+interface ChromeRuntime {
+  onMessage: {
+    addListener: (callback: (message: any, sender: any, sendResponse: any) => void) => void;
+  };
+}
 
-// Chrome extension types
-declare global {
-  interface Window {
-    chrome?: {
-      runtime?: {
-        onMessage: {
-          addListener: (callback: (message: any, sender: any, sendResponse: any) => void) => void;
-        };
-      };
-    };
-  }
+interface ChromeAPI {
+  runtime?: ChromeRuntime;
+}
+
+interface Window {
+  chrome?: ChromeAPI;
 }
 
 // Type definitions for DOM elements
@@ -50,19 +48,11 @@ interface BadgeDiv extends HTMLDivElement {
   innerHTML: string;
 }
 
-class ConventionalShields {
-  private badgeTypes: ConventionalLabel[] = [
-    'praise', 'nitpick', 'suggestion', 'issue', 'todo',
-    'question', 'thought', 'chore', 'note', 'typo',
-    'polish', 'quibble'
-  ];
-
-  private decorations: ConventionalDecoration[] = [
-    'non-blocking', 'blocking', 'if-minor', 'security', 'test',
-    'ux', 'performance', 'accessibility', 'documentation', 'style',
-    'refactor', 'bug', 'feature', 'breaking', 'deprecated',
-    'experimental', 'wip', 'draft', 'review', 'approved', 'rejected'
-  ];
+class ConventionalShieldsExtension {
+  private badgeTypes: readonly ConventionalShields.ConventionalLabel[] = ConventionalShields.availableLabels;
+  private decorations: readonly ConventionalShields.ConventionalDecoration[] = ConventionalShields.availableDecorations;
+  private observers: MutationObserver[] = [];
+  private enhancedForms: WeakSet<BadgeForm> = new WeakSet();
 
   constructor() {
     this.init();
@@ -88,7 +78,11 @@ class ConventionalShields {
     // GitHub is a SPA, so we need to watch for navigation changes
     const observer = new MutationObserver(() => {
       if (window.location.pathname.includes('/pull/')) {
-        this.setupBadgeSystem();
+        // Debounce rapid changes
+        clearTimeout((this as any).navigationTimeout);
+        (this as any).navigationTimeout = setTimeout(() => {
+          this.setupBadgeSystem();
+        }, 100);
       }
     });
 
@@ -96,14 +90,20 @@ class ConventionalShields {
       childList: true,
       subtree: true
     });
+
+    this.observers.push(observer);
   }
 
   setupBadgeSystem() {
-    // Find all review comment forms
-    this.findAndEnhanceCommentForms();
+    try {
+      // Find all review comment forms
+      this.findAndEnhanceCommentForms();
 
-    // Watch for new comment forms being added
-    this.watchForNewCommentForms();
+      // Watch for new comment forms being added
+      this.watchForNewCommentForms();
+    } catch (error) {
+      console.error('Failed to setup badge system:', error);
+    }
   }
 
   findAndEnhanceCommentForms(): void {
@@ -117,16 +117,21 @@ class ConventionalShields {
         mutation.addedNodes.forEach((node: Node) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
             const element = node as Element;
+
             // Check if the added node is a comment form
-            if (element.attributes.getNamedItem('data-marker-id')?.value === 'new-comment' || element.classList && (element.classList.contains('js-comment-form') || element.classList.contains('js-new-comment-form') || element.classList.contains('js-inline-comment-form'))) {
-              console.log('enhancing comment form', element);
+            if (this.isCommentForm(element)) {
+              console.log('Enhancing comment form', element);
               this.enhanceCommentForm(element as BadgeForm);
             }
 
             // Check if any comment forms were added within the node
-            const forms = element.querySelectorAll && element.querySelectorAll<BadgeForm>('.js-comment-form, .js-new-comment-form');
+            const forms = element.querySelectorAll?.('form[data-marker-id="new-comment"], .js-comment-form, .js-new-comment-form, .js-inline-comment-form');
             if (forms) {
-              forms.forEach((form: BadgeForm) => this.enhanceCommentForm(form));
+              forms.forEach((form: Element) => {
+                if (this.isCommentForm(form)) {
+                  this.enhanceCommentForm(form as BadgeForm);
+                }
+              });
             }
           }
         });
@@ -137,29 +142,41 @@ class ConventionalShields {
       childList: true,
       subtree: true
     });
+
+    this.observers.push(observer);
+  }
+
+  private isCommentForm(element: Element): boolean {
+    return element.matches?.('[data-marker-id="new-comment"], .js-inline-comment-form, .js-comment-form, .js-new-comment-form') || false;
   }
 
   enhanceCommentForm(form: BadgeForm): void {
-    if (form.dataset.badgeEnhanced) return; // Prevent double enhancement
+    if (this.enhancedForms.has(form)) return; // Prevent double enhancement
 
     const textarea = form.querySelector('textarea') as BadgeTextarea | null;
     if (!textarea) return;
 
-    // Mark as enhanced
-    form.dataset.badgeEnhanced = 'true';
+    try {
+      // Mark as enhanced
+      this.enhancedForms.add(form);
 
-    // Create badge selector
-    const badgeSelector = this.createBadgeSelector();
+      // Create badge selector
+      const badgeSelector = this.createBadgeSelector();
 
-    // Insert badge selector before the textarea
-    const parentNode = textarea.parentNode;
-    if (parentNode) {
-      (parentNode as HTMLElement).style.flexWrap = 'wrap';
-      parentNode.insertBefore(badgeSelector, textarea);
+      // Insert badge selector before the textarea
+      const parentNode = textarea.parentNode;
+      if (parentNode) {
+        (parentNode as HTMLElement).style.flexWrap = 'wrap';
+        parentNode.insertBefore(badgeSelector, textarea);
+      }
+
+      // Add event listeners
+      this.addBadgeEventListeners(badgeSelector, textarea, form);
+    } catch (error) {
+      console.error('Failed to enhance comment form:', error);
+      // Remove from enhanced set if enhancement failed
+      this.enhancedForms.delete(form);
     }
-
-    // Add event listeners
-    this.addBadgeEventListeners(badgeSelector, textarea);
   }
 
   createBadgeSelector() {
@@ -248,7 +265,7 @@ class ConventionalShields {
     return container;
   }
 
-  addBadgeEventListeners(container: HTMLElement, textarea: BadgeTextarea): void {
+  addBadgeEventListeners(container: HTMLElement, textarea: BadgeTextarea, form: BadgeForm): void {
     const typeSelect = container.querySelector('.shield-type') as BadgeSelect;
     const decorationSelect = container.querySelector('.shield-decorations') as BadgeSelect;
     const previewContent = container.querySelector('.shield-preview-content') as BadgeDiv;
@@ -257,11 +274,11 @@ class ConventionalShields {
 
     // Update preview when selections change
     const updatePreview = (): void => {
-      const selectedType = typeSelect.value as ConventionalLabel;
-      const selectedDecorations = decorationSelect.value as ConventionalDecoration;
+      const selectedType = typeSelect.value;
+      const selectedDecorations = decorationSelect.value;
 
       if (selectedType) {
-        const shieldUrl = this.generateBadge(selectedType, [selectedDecorations]);
+        const shieldUrl = this.generateBadge(selectedType as ConventionalShields.ConventionalLabel, selectedDecorations ? [selectedDecorations as ConventionalShields.ConventionalDecoration] : []);
         const img = document.createElement('img');
         img.src = shieldUrl;
         img.alt = `${selectedType} shield`;
@@ -284,53 +301,97 @@ class ConventionalShields {
 
     // Insert shield into textarea
     insertBtn.addEventListener('click', () => {
-      this.insertBadgeIntoTextarea(textarea, typeSelect.value as ConventionalLabel, [decorationSelect.value as ConventionalDecoration]);
+      try {
+        this.insertBadgeIntoTextarea(textarea, typeSelect.value as ConventionalShields.ConventionalLabel, decorationSelect.value ? [decorationSelect.value as ConventionalShields.ConventionalDecoration] : []);
+      } catch (error) {
+        console.error('Failed to insert badge:', error);
+      }
     });
 
     // Discard selections
     discardBtn.addEventListener('click', () => {
-      typeSelect.value = '';
-      decorationSelect.value = '';
+      try {
+        // Reset form selections
+        typeSelect.value = '';
+        decorationSelect.value = '';
 
-      // Clear preview content safely
-      while (previewContent.firstChild) {
-        previewContent.removeChild(previewContent.firstChild);
+        // Clear preview content safely
+        while (previewContent.firstChild) {
+          previewContent.removeChild(previewContent.firstChild);
+        }
+
+        // Remove the container
+        container.remove();
+
+        // Clean up the form from enhancedForms
+        this.enhancedForms.delete(form);
+      } catch (error) {
+        console.error('Failed to discard badge:', error);
       }
-
-      container.remove();
     });
   }
 
-  insertBadgeIntoTextarea(textarea: BadgeTextarea, badgeType: ConventionalLabel, decorations: ConventionalDecoration[] = []): void {
+  insertBadgeIntoTextarea(textarea: BadgeTextarea, badgeType: ConventionalShields.ConventionalLabel, decorations: ConventionalShields.ConventionalDecoration[] = []): void {
     if (!badgeType) return;
 
-    const shieldUrl = this.generateBadge(badgeType, decorations);
-    const shieldMarkdown = `![${badgeType}](${shieldUrl})`;
+    try {
+      const shieldUrl = this.generateBadge(badgeType, decorations);
+      const shieldMarkdown = `![${badgeType}](${shieldUrl})`;
 
-    // Insert at cursor position or at the beginning
-    const cursorPos = textarea.selectionStart;
-    const textBefore = textarea.value.substring(0, cursorPos);
-    const textAfter = textarea.value.substring(cursorPos);
+      // Insert at cursor position or at the beginning
+      const cursorPos = textarea.selectionStart;
+      const textBefore = textarea.value.substring(0, cursorPos);
+      const textAfter = textarea.value.substring(cursorPos);
 
-    textarea.value = textBefore + shieldMarkdown + textAfter;
+      textarea.value = textBefore + shieldMarkdown + textAfter;
 
-    // Update cursor position
-    const newCursorPos = cursorPos + shieldMarkdown.length;
-    textarea.setSelectionRange(newCursorPos, newCursorPos);
+      // Update cursor position
+      const newCursorPos = cursorPos + shieldMarkdown.length;
+      textarea.setSelectionRange(newCursorPos, newCursorPos);
 
-    // Trigger input event to update GitHub's preview
-    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      // Trigger input event to update GitHub's preview
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    } catch (error) {
+      console.error('Failed to insert badge into textarea:', error);
+      throw error;
+    }
   }
 
-  generateBadge(type: ConventionalLabel, decorations: ConventionalDecoration[] = []): string {
-    const badge = generateConventionalShield({
-      label: type,
-      decorations
-    });
+  generateBadge(type: ConventionalShields.ConventionalLabel, decorations: ConventionalShields.ConventionalDecoration[] = []): string {
+    try {
+      const badge = ConventionalShields.generateConventionalShield({
+        label: type,
+        decorations
+      });
 
-    return badge;
+      return badge;
+    } catch (error) {
+      console.error('Failed to generate badge:', error);
+      throw new Error(`Failed to generate badge for type: ${type}`);
+    }
+  }
+
+  // Cleanup method to prevent memory leaks
+  public destroy(): void {
+    this.observers.forEach(observer => observer.disconnect());
+    this.observers = [];
+    this.enhancedForms = new WeakSet();
   }
 }
 
 // Initialize the extension
-const extension = new ConventionalShields();
+const conventionalShieldsExtension = new ConventionalShieldsExtension();
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+  conventionalShieldsExtension.destroy();
+});
+
+// Cleanup on extension unload (if supported)
+if ((window as Window)?.chrome?.runtime?.onMessage) {
+  (window as Window)?.chrome?.runtime?.onMessage?.addListener((message) => {
+    if (message.type === 'cleanup') {
+      conventionalShieldsExtension.destroy();
+    }
+  });
+}

@@ -12,7 +12,7 @@
     "postbuild": "pnpm prepare:extension",
     "dev": "tsc --watch",
     "prepare:extension": "tsc && mkdir -p src/extension/lib && mkdir -p src/extension/lib/config && cp dist/index.js src/extension/lib/index.js && cp dist/config/palette.json src/extension/lib/config/palette.json && cp dist/index.d.ts src/extension/lib/index.d.ts",
-    "build:extension": "node scripts/build-extension.js",
+    "build:extension": "cd src/extension && pnpm run build",
     "build:extension:bundle": "node scripts/build-extension-bundled.js"
   },
   "keywords": [

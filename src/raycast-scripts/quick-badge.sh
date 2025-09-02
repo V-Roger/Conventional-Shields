@@ -31,10 +31,10 @@ if ! command -v node &> /dev/null; then
 fi
 
 # Check if the project is built
-if [ ! -f "$PROJECT_ROOT/dist/index.js" ]; then
+if [ ! -f "$PROJECT_ROOT/raycast-scripts/lib/index.js" ]; then
     echo -e "${YELLOW}⚠️  Project not built. Building now...${NC}"
     cd "$PROJECT_ROOT"
-    npm run build
+    npm run build:raycast
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Failed to build project${NC}"
         exit 1
@@ -353,7 +353,7 @@ EOF
 
 # Generate badge
 cd "$PROJECT_ROOT"
-RESULT=$(node "$TEMP_SCRIPT" "$PROJECT_ROOT/dist/index.js" "$LABEL" "$DECORATIONS")
+RESULT=$(node "$TEMP_SCRIPT" "$PROJECT_ROOT/raycast-scripts/lib/index.js" "$LABEL" "$DECORATIONS")
 
 # Clean up temp script
 rm "$TEMP_SCRIPT"

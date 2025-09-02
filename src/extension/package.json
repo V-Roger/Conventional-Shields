@@ -1,0 +1,39 @@
+{
+  "name": "conventional-comments-shields-extension",
+  "version": "1.0.0",
+  "description": "Browser extension for adding conventional comment shields to GitHub PR reviews",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:bundle": "tsc && node ../../scripts/build-extension-bundled.js",
+    "postbuild": "cp styles.css dist/ && cp -r icons dist/",
+    "package": "tsc && cd ./dist && web-ext build --overwrite-dest",
+    "package:bundle": "pnpm run build:bundle && cd ./dist && web-ext build --overwrite-dest",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "browser-extension",
+    "github",
+    "conventional-comments",
+    "code-review",
+    "badges",
+    "shields",
+    "shields.io",
+    "pull-request"
+  ],
+  "author": "Virgil ROGER <roger.virgil@gmail.com>",
+  "license": "CC-BY-SA-4.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V-Roger/conventional-shields"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.0.0",
+    "typescript": "^5.9.2",
+    "web-ext": "^7.4.0"
+  }
+}

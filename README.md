@@ -232,6 +232,44 @@ Common decorations for additional context:
 - **approved**
 - **rejected**
 
+## Browser Extension
+
+This project includes a browser extension for GitHub that adds conventional comment badges to PR review comments.
+
+### Building the Extension
+
+#### Standard Build (with separate lib files)
+```bash
+# From the root directory
+pnpm run build:extension
+
+# Or from the extension directory
+cd src/extension
+pnpm run build
+```
+
+#### Bundled Build (single content.js file)
+```bash
+# From the root directory
+pnpm run build:extension:bundle
+
+# Or from the extension directory
+cd src/extension
+pnpm run build:bundle
+```
+
+The bundled build merges the `lib/index.js` content directly into `content.js`, creating a single file that doesn't require separate library files. This is useful for browser extensions that need to be self-contained.
+
+### Loading the Extension
+
+1. Build the extension using one of the methods above
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable "Developer mode"
+4. Click "Load unpacked"
+5. Select the `src/extension/dist/` directory
+
+The extension will add a badge selector to GitHub PR review comment forms, allowing you to easily insert conventional comment badges.
+
 ## License
 
 CC-BY-SA-4.0

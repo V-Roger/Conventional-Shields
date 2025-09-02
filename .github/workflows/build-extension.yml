@@ -1,0 +1,81 @@
+name: Build and Package Extension
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-extension:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10'
+          
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+            
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Build extension
+        run: pnpm run build
+
+      - name: Prepare extension files
+        run: pnpm run prepare:extension
+        
+      - name: Package extension
+        working-directory: src/extension
+        run: pnpm run package:bundle
+        
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: conventional-shields-extension
+          path: src/extension/dist/*.zip
+          retention-days: 30
+          
+      - name: Create release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: src/extension/dist/*.zip
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          body: |
+            Automated release from main branch
+            
+            ## Changes
+            - Build triggered by commit: ${{ github.sha }}
+            - Extension packaged and ready for distribution
+            
+            ## Installation
+            1. Download the `.zip` file
+            2. Extract it to a folder
+            3. Load it as an unpacked extension in your browser
+          draft: false
+          prerelease: false

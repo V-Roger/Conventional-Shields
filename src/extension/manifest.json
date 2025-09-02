@@ -3,24 +3,11 @@
   "name": "Conventional Shields for GitHub",
   "version": "1.0.2",
   "description": "Add conventional comment shields to GitHub PR review comments",
-  "permissions": [
-    "activeTab",
-    "storage"
-  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "{c74e2ea6-9cc0-4927-9901-44efc9c47548}"
     }
   },
-  "web_accessible_resources": [
-    {
-      "resources": ["icons/*"],
-      "matches": ["https://github.com/*"]
-    }
-  ],
-  "host_permissions": [
-    "https://github.com/*"
-  ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: blob: https://img.shields.io;"
   },
@@ -31,9 +18,6 @@
       "css": ["./styles.css"]
     }
   ],
-  "action": {
-    "default_title": "Conventional Shields for GitHub"
-  },
   "icons": {
     "16": "icons/icon-16.png",
     "48": "icons/icon-48.png",

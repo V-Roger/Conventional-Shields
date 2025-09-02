@@ -10,8 +10,10 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
     "prepare:extension": "mkdir -p src/extension/lib && mkdir -p src/extension/lib/config && cp dist/index.js src/extension/lib/index.js && cp dist/config/palette.json src/extension/lib/config/palette.json && cp dist/index.d.ts src/extension/lib/index.d.ts",
-    "prepare:raycast": "mkdir -p src/raycast-scripts/lib && mkdir -p src/raycast-scripts/lib/config && cp dist/index.js src/raycast-scripts/lib/index.js && cp dist/config/palette.json src/raycast-scripts/lib/config/palette.json",
+    "prepare:raycast": "mkdir -p src/raycast-scripts/lib && mkdir -p src/raycast-scripts/lib/config && cp dist/index.js src/raycast-scripts/lib/index.js && cp dist/config/palette.json src/extension/lib/config/palette.json",
     "build:raycast": "npm run build && npm run prepare:raycast"
   },
   "keywords": [
@@ -29,7 +31,10 @@
     "url": "https://github.com/V-Roger/conventional-shields"
   },
   "devDependencies": {
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0"
   },
   "files": [
     "dist/"

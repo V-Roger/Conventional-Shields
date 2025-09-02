@@ -31,17 +31,8 @@ interface BadgeSelect extends HTMLSelectElement {
   value: string;
 }
 
-interface BadgeCheckbox extends HTMLInputElement {
-  checked: boolean;
-  value: string;
-}
-
 interface BadgeButton extends HTMLButtonElement {
   type: "submit" | "reset" | "button";
-}
-
-interface BadgeLabel extends HTMLLabelElement {
-  // textContent is already defined in HTMLLabelElement
 }
 
 interface BadgeDiv extends HTMLDivElement {
@@ -171,7 +162,7 @@ class ConventionalShieldsExtension {
       }
 
       // Add event listeners
-      this.addBadgeEventListeners(badgeSelector, textarea, form);
+      this.addBadgeEventListeners(badgeSelector, textarea);
     } catch (error) {
       console.error('Failed to enhance comment form:', error);
       // Remove from enhanced set if enhancement failed
@@ -265,7 +256,7 @@ class ConventionalShieldsExtension {
     return container;
   }
 
-  addBadgeEventListeners(container: HTMLElement, textarea: BadgeTextarea, form: BadgeForm): void {
+  addBadgeEventListeners(container: HTMLElement, textarea: BadgeTextarea): void {
     const typeSelect = container.querySelector('.shield-type') as BadgeSelect;
     const decorationSelect = container.querySelector('.shield-decorations') as BadgeSelect;
     const previewContent = container.querySelector('.shield-preview-content') as BadgeDiv;

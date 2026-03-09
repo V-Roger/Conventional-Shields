@@ -1,6 +1,7 @@
 import * as ConventionalShields from './lib/index.js';
 
 interface ChromeRuntime {
+  getURL?: (path: string) => string;
   onMessage: {
     addListener: (callback: (message: any, sender: any, sendResponse: any) => void) => void;
   };
@@ -44,6 +45,8 @@ class ConventionalShieldsExtension {
   private decorations: readonly ConventionalShields.ConventionalDecoration[] = ConventionalShields.availableDecorations;
   private observers: MutationObserver[] = [];
   private enhancedForms: WeakSet<BadgeForm> = new WeakSet();
+  /** Short URL cache (label|decorations -> tinyurl). Loaded from extension config, no network at insert time. */
+  private shortUrlCache: Record<string, string> | null = null;
 
   constructor() {
     this.init();
@@ -55,6 +58,23 @@ class ConventionalShieldsExtension {
 
     // Listen for navigation changes (SPA)
     this.observeNavigation();
+
+    // Load pre-generated short URL cache (no network when inserting badges)
+    this.loadShortUrlCache();
+  }
+
+  private loadShortUrlCache(): void {
+    const getURL = (window as Window & { chrome?: ChromeAPI })?.chrome?.runtime?.getURL;
+    if (!getURL) return;
+    const url = getURL('lib/config/badge-url-cache.json');
+    fetch(url)
+      .then((res) => res.json())
+      .then((cache: Record<string, string>) => {
+        this.shortUrlCache = cache;
+      })
+      .catch(() => {
+        // No cache or invalid: fall back to full URLs
+      });
   }
 
   waitForGitHub() {
@@ -318,7 +338,9 @@ class ConventionalShieldsExtension {
     if (!badgeType) return;
 
     try {
-      const shieldUrl = this.generateBadge(badgeType, decorations);
+      const fullUrl = this.generateBadge(badgeType, decorations);
+      const key = ConventionalShields.getBadgeCacheKey(badgeType, decorations);
+      const shieldUrl = (this.shortUrlCache && this.shortUrlCache[key]) || fullUrl;
       const shieldMarkdown = `![${badgeType}](${shieldUrl})`;
 
       // Insert at cursor position or at the beginning

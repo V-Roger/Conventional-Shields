@@ -222,6 +222,15 @@ function generateBadge(options: BadgeOptions): string {
   return fullUrl;
 }
 
+/** Cache key for badge URL lookup: label only or "label|dec1,dec2" (decorations sorted). */
+function getBadgeCacheKey(
+  label: ConventionalLabel,
+  decorations: ConventionalDecoration[] = []
+): string {
+  if (!decorations.length) return label;
+  return `${label}|${[...decorations].sort().join(',')}`;
+}
+
 // Generate conventional comment badge
 function generateConventionalShield(options: ConventionalShieldOptions): string {
   const {
@@ -314,6 +323,7 @@ function generateChoreBadge(decorations?: ConventionalDecoration[]): string {
 export {
   generateBadge,
   generateConventionalShield,
+  getBadgeCacheKey,
   generatePraiseBadge,
   generateSuggestionBadge,
   generateIssueBadge,

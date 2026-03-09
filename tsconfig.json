@@ -23,7 +23,8 @@
   },
   "include": [
     "./src/index.ts",
-    "./src/config/**/*.json"
+    "./src/config/**/*.json",
+    "./src/scripts/**/*.ts"
   ],
   "exclude": [
     "node_modules",

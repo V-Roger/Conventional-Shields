@@ -9,7 +9,7 @@
     }
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: blob: https://img.shields.io;"
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: blob: https://img.shields.io https://tinyurl.com;"
   },
   "content_scripts": [
     {

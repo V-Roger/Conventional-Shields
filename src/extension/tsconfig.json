@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -20,7 +20,6 @@
     "noEmit": false,
     "allowJs": true,
     "checkJs": false,
-    "baseUrl": ".",
     "lib": ["ES2020", "DOM", "WebWorker"],
     "types": [],
     "typeRoots": []

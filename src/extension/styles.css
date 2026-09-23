@@ -8,6 +8,29 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
 }
 
+/* Sits in normal flow above the file-comment markdown editor */
+.conventional-shields-container--file-comment {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 0 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.conventional-shields-container--file-comment .shield-type-selector {
+  padding: 0;
+}
+
+.conventional-shields-container--file-comment .shield-select--wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.conventional-shields-container--file-comment .shield-actions {
+  top: 0;
+  padding: 8px 0 0;
+}
+
 .shield-selector {
   display: flex;
   flex-direction: column;

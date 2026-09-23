@@ -71,6 +71,7 @@ A browser extension that adds conventional comment badges to GitHub Pull Request
 
 2. **Add a Review Comment**
    - Click the "+" button next to any line number
+   - Or click **Comment on this file** in the file header
    - Or click "Add review comment" at the bottom
 
 3. **Use the Badge Selector**

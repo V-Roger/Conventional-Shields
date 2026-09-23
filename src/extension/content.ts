@@ -45,7 +45,23 @@ class ConventionalShieldsExtension {
   private decorations: readonly ConventionalShields.ConventionalDecoration[] = ConventionalShields.availableDecorations;
   private observers: MutationObserver[] = [];
   private enhancedForms: WeakSet<BadgeForm> = new WeakSet();
+  private enhancedTextareas: WeakSet<HTMLTextAreaElement> = new WeakSet();
+  /** File-comment composers, so a React re-render can put the same selector back. */
+  private fileCommentSelectors: WeakMap<HTMLTextAreaElement, HTMLElement> = new WeakMap();
   private navigationTimeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  /** Legacy review forms, including classic "comment on this file" forms. */
+  private readonly legacyCommentFormSelector =
+    '[data-marker-id="new-comment"], .js-inline-comment-form, .js-comment-form, .js-new-comment-form';
+
+  /**
+   * Current Files-changed file comments: the composer opened by
+   * "Comment on this file", and replies on an existing file thread.
+   */
+  private readonly fileCommentRootSelector = [
+    '[class*="Diff-module__diffAddFileThread"]',
+    '[class*="InlineMarkers-module__fileMarkersWrapper"]',
+  ].join(', ');
   /** Short URL cache (label|decorations -> tinyurl). Loaded from extension config, no network at insert time. */
   private shortUrlCache: Record<string, string> | null = null;
 
@@ -122,8 +138,7 @@ class ConventionalShieldsExtension {
   }
 
   findAndEnhanceCommentForms(): void {
-    const commentForms = document.querySelectorAll<BadgeForm>('[data-marker-id="new-comment"], .js-inline-comment-form, .js-comment-form, .js-new-comment-form');
-    commentForms.forEach((form: BadgeForm) => this.enhanceCommentForm(form));
+    this.considerElement(document.body);
   }
 
   watchForNewCommentForms(): void {
@@ -131,22 +146,7 @@ class ConventionalShieldsExtension {
       mutations.forEach((mutation: MutationRecord) => {
         mutation.addedNodes.forEach((node: Node) => {
           if (node.nodeType === Node.ELEMENT_NODE) {
-            const element = node as Element;
-
-            // Check if the added node is a comment form
-            if (this.isCommentForm(element)) {
-              this.enhanceCommentForm(element as BadgeForm);
-            }
-
-            // Check if any comment forms were added within the node
-            const forms = element.querySelectorAll?.('form[data-marker-id="new-comment"], .js-comment-form, .js-new-comment-form, .js-inline-comment-form');
-            if (forms) {
-              forms.forEach((form: Element) => {
-                if (this.isCommentForm(form)) {
-                  this.enhanceCommentForm(form as BadgeForm);
-                }
-              });
-            }
+            this.considerElement(node as Element);
           }
         });
       });
@@ -160,19 +160,81 @@ class ConventionalShieldsExtension {
     this.observers.push(observer);
   }
 
+  private considerElement(element: Element): void {
+    if (this.isCommentForm(element)) {
+      this.enhanceCommentForm(element as BadgeForm);
+    }
+
+    if (this.isFileCommentRoot(element)) {
+      this.enhanceFileCommentRoot(element);
+    } else {
+      const fileRoot = element.closest(this.fileCommentRootSelector);
+      if (fileRoot) this.enhanceFileCommentRoot(fileRoot);
+    }
+
+    element.querySelectorAll(this.legacyCommentFormSelector).forEach((form: Element) => {
+      if (this.isCommentForm(form)) this.enhanceCommentForm(form as BadgeForm);
+    });
+    element.querySelectorAll(this.fileCommentRootSelector).forEach((root: Element) => {
+      this.enhanceFileCommentRoot(root);
+    });
+  }
+
   private isCommentForm(element: Element): boolean {
-    return element.matches?.('[data-marker-id="new-comment"], .js-inline-comment-form, .js-comment-form, .js-new-comment-form') || false;
+    return element.matches?.(this.legacyCommentFormSelector) || false;
+  }
+
+  private isFileCommentRoot(element: Element): boolean {
+    return element.matches?.(this.fileCommentRootSelector) || false;
+  }
+
+  private enhanceFileCommentRoot(root: Element): void {
+    if (!window.location.pathname.includes('/pull/')) return;
+
+    root.querySelectorAll('textarea').forEach((textarea: HTMLTextAreaElement) => {
+      this.enhanceFileCommentTextarea(textarea as BadgeTextarea);
+    });
+  }
+
+  private enhanceFileCommentTextarea(textarea: BadgeTextarea): void {
+    if (textarea.closest('template, #js-inline-comments-single-container-template')) return;
+    if (textarea.closest(this.legacyCommentFormSelector)) return;
+
+    let badgeSelector = this.fileCommentSelectors.get(textarea);
+    if (badgeSelector?.dataset.dismissed === 'true') return;
+
+    if (!badgeSelector) {
+      badgeSelector = this.createBadgeSelector();
+      badgeSelector.classList.add('conventional-shields-container--file-comment');
+      this.fileCommentSelectors.set(textarea, badgeSelector);
+      this.enhancedTextareas.add(textarea);
+      this.addBadgeEventListeners(badgeSelector, textarea);
+    }
+
+    this.placeFileCommentSelector(textarea, badgeSelector);
+  }
+
+  /** Sit above the markdown field. Re-insert the same node if GitHub's render drops it. */
+  private placeFileCommentSelector(textarea: BadgeTextarea, badgeSelector: HTMLElement): void {
+    const inputWrapper = textarea.closest('[class*="MarkdownInput-module__inputWrapper"]');
+    const parent = inputWrapper?.parentElement ?? textarea.parentElement;
+    const before = inputWrapper ?? textarea;
+    if (!parent || before.parentElement !== parent) return;
+    if (badgeSelector.parentElement === parent && badgeSelector.nextElementSibling === before) return;
+
+    parent.insertBefore(badgeSelector, before);
   }
 
   enhanceCommentForm(form: BadgeForm): void {
     if (this.enhancedForms.has(form)) return; // Prevent double enhancement
 
     const textarea = form.querySelector('textarea') as BadgeTextarea | null;
-    if (!textarea) return;
+    if (!textarea || this.enhancedTextareas.has(textarea)) return;
 
     try {
       // Mark as enhanced
       this.enhancedForms.add(form);
+      this.enhancedTextareas.add(textarea);
 
       // Create badge selector
       const badgeSelector = this.createBadgeSelector();
@@ -190,6 +252,7 @@ class ConventionalShieldsExtension {
       console.error('Failed to enhance comment form:', error);
       // Remove from enhanced set if enhancement failed
       this.enhancedForms.delete(form);
+      this.enhancedTextareas.delete(textarea);
     }
   }
 
@@ -351,14 +414,22 @@ class ConventionalShieldsExtension {
       const textBefore = textarea.value.substring(0, cursorPos);
       const textAfter = textarea.value.substring(cursorPos);
 
-      textarea.value = textBefore + shieldMarkdown + textAfter;
+      const nextValue = textBefore + shieldMarkdown + textAfter;
+      // Use the prototype setter so React-controlled file comment editors keep the badge
+      const valueSetter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')?.set;
+      if (valueSetter) {
+        valueSetter.call(textarea, nextValue);
+      } else {
+        textarea.value = nextValue;
+      }
 
       // Update cursor position
       const newCursorPos = cursorPos + shieldMarkdown.length;
       textarea.setSelectionRange(newCursorPos, newCursorPos);
 
-      // Trigger input event to update GitHub's preview
+      // Trigger input event to update GitHub's preview and React state
       textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      textarea.dispatchEvent(new Event('change', { bubbles: true }));
     } catch (error) {
       console.error('Failed to insert badge into textarea:', error);
       throw error;
@@ -386,6 +457,8 @@ class ConventionalShieldsExtension {
     this.observers.forEach(observer => observer.disconnect());
     this.observers = [];
     this.enhancedForms = new WeakSet();
+    this.enhancedTextareas = new WeakSet();
+    this.fileCommentSelectors = new WeakMap();
   }
 }
 

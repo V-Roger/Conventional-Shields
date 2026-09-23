@@ -322,15 +322,15 @@ class ConventionalShieldsExtension {
       }
     });
 
-    // Discard selections
+    // Discard the current selection without removing the dropdowns
     discardBtn.addEventListener('click', () => {
       try {
-        // Reset form selections
-        typeSelect.value = '';
+        typeSelect.selectedIndex = 0;
         decorationSelect.value = '';
 
-        // Remove the container
-        container.remove();
+        while (previewContent.firstChild) {
+          previewContent.removeChild(previewContent.firstChild);
+        }
       } catch (error) {
         console.error('Failed to discard badge:', error);
       }

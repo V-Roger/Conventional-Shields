@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Conventional Shields for GitHub",
-  "version": "1.1.1",
-  "description": "Add conventional comment shields to GitHub PR review comments",
+  "version": "1.2.0",
+  "description": "Add conventional comment shields to GitHub pull request reviews, including file comments",
   "browser_specific_settings": {
     "gecko": {
       "id": "{c74e2ea6-9cc0-4927-9901-44efc9c47548}"

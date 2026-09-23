@@ -45,6 +45,7 @@ class ConventionalShieldsExtension {
   private decorations: readonly ConventionalShields.ConventionalDecoration[] = ConventionalShields.availableDecorations;
   private observers: MutationObserver[] = [];
   private enhancedForms: WeakSet<BadgeForm> = new WeakSet();
+  private navigationTimeoutId: ReturnType<typeof setTimeout> | undefined;
   /** Short URL cache (label|decorations -> tinyurl). Loaded from extension config, no network at insert time. */
   private shortUrlCache: Record<string, string> | null = null;
 
@@ -56,8 +57,9 @@ class ConventionalShieldsExtension {
     // Wait for GitHub to load
     this.waitForGitHub();
 
-    // Listen for navigation changes (SPA)
+    // Listen for navigation changes (SPA) and new comment forms — once each
     this.observeNavigation();
+    this.watchForNewCommentForms();
 
     // Load pre-generated short URL cache (no network when inserting badges)
     this.loadShortUrlCache();
@@ -65,6 +67,12 @@ class ConventionalShieldsExtension {
 
   private loadShortUrlCache(): void {
     const getURL = (window as Window & { chrome?: ChromeAPI })?.chrome?.runtime?.getURL;
+    const inlineCache = (globalThis as typeof globalThis & { BADGE_URL_CACHE?: Record<string, string> }).BADGE_URL_CACHE;
+    if (inlineCache && typeof inlineCache === 'object' && Object.keys(inlineCache).length > 0) {
+      this.shortUrlCache = inlineCache;
+      return;
+    }
+    console.warn('Badge URL cache missing or empty; inserts will use full Shields.io URLs');
     if (!getURL) return;
     const url = getURL('lib/config/badge-url-cache.json');
     fetch(url)
@@ -90,8 +98,8 @@ class ConventionalShieldsExtension {
     const observer = new MutationObserver(() => {
       if (window.location.pathname.includes('/pull/')) {
         // Debounce rapid changes
-        clearTimeout((this as any).navigationTimeout);
-        (this as any).navigationTimeout = setTimeout(() => {
+        clearTimeout(this.navigationTimeoutId);
+        this.navigationTimeoutId = setTimeout(() => {
           this.setupBadgeSystem();
         }, 100);
       }
@@ -107,11 +115,7 @@ class ConventionalShieldsExtension {
 
   setupBadgeSystem() {
     try {
-      // Find all review comment forms
       this.findAndEnhanceCommentForms();
-
-      // Watch for new comment forms being added
-      this.watchForNewCommentForms();
     } catch (error) {
       console.error('Failed to setup badge system:', error);
     }
@@ -131,7 +135,6 @@ class ConventionalShieldsExtension {
 
             // Check if the added node is a comment form
             if (this.isCommentForm(element)) {
-              console.log('Enhancing comment form', element);
               this.enhanceCommentForm(element as BadgeForm);
             }
 
@@ -378,6 +381,8 @@ class ConventionalShieldsExtension {
 
   // Cleanup method to prevent memory leaks
   public destroy(): void {
+    clearTimeout(this.navigationTimeoutId);
+    this.navigationTimeoutId = undefined;
     this.observers.forEach(observer => observer.disconnect());
     this.observers = [];
     this.enhancedForms = new WeakSet();

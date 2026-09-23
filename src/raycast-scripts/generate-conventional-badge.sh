@@ -36,7 +36,7 @@ fi
 if [ ! -f "$PROJECT_ROOT/raycast-scripts/lib/index.js" ]; then
     echo -e "${YELLOW}⚠️  Project not built. Building now...${NC}"
     cd "$PROJECT_ROOT"
-    npm run build:raycast
+    pnpm run build:raycast
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Failed to build project${NC}"
         exit 1

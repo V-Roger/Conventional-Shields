@@ -50,16 +50,6 @@ jobs:
         
       - name: ESLint check
         run: pnpm run lint
-        continue-on-error: true
-        
-      - name: Check for linting errors
-        run: |
-          if pnpm run lint 2>&1 | grep -q "✖.*[1-9][0-9]* errors"; then
-            echo "❌ Linting errors found!"
-            exit 1
-          else
-            echo "✅ No linting errors found"
-          fi
         
   build-extension:
     runs-on: ubuntu-latest

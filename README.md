@@ -5,7 +5,7 @@ A TypeScript lib for generating [Shields.io](https://shields.io/) badges with a 
 ## Features
 
 - 🎨 **Color Palette**: 16 pretty colors for consistent badge styling
-- 🏷️ **Badge Generator**: implementats the Shields.io static badge API
+- 🏷️ **Badge Generator**: implements the Shields.io static badge API
 - 💬 **Conventional Comments**: supports the [Conventional Comments](https://conventionalcomments.org/#labels) specifications
 - 🚀 **Convenience Functions**: Pre-built functions for common badge types and comment labels
 - 🤖 **Raycast scripts**: for the MacOs users out there

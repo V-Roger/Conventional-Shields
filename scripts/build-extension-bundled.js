@@ -51,11 +51,22 @@ function bundleContent(extensionDir) {
   const contentJsPath = path.join(distDir, 'content.js');
   const libIndexPath = path.join(distDir, 'lib', 'index.js');
   const paletteJsonPath = path.join(distDir, 'lib', 'config', 'palette.json');
+  const badgeUrlCachePath = path.join(distDir, 'lib', 'config', 'badge-url-cache.json');
+  const badgeUrlCacheFallback = path.join(extensionDir, '..', '..', 'src', 'config', 'badge-url-cache.json');
 
   // Read the files
   let contentJs = fs.readFileSync(contentJsPath, 'utf8');
   let libIndex = fs.readFileSync(libIndexPath, 'utf8');
   const paletteJson = fs.readFileSync(paletteJsonPath, 'utf8');
+  const badgeUrlCache = fs.existsSync(badgeUrlCachePath)
+    ? JSON.parse(fs.readFileSync(badgeUrlCachePath, 'utf8'))
+    : fs.existsSync(badgeUrlCacheFallback)
+      ? JSON.parse(fs.readFileSync(badgeUrlCacheFallback, 'utf8'))
+      : {};
+
+  if (!badgeUrlCache || typeof badgeUrlCache !== 'object' || Object.keys(badgeUrlCache).length === 0) {
+    console.warn('⚠️  Badge URL cache is empty; bundled extension will fall back to full Shields.io URLs');
+  }
 
   // Remove the import statement
   contentJs = contentJs.replace(/import \* as ConventionalShields from '\.\/lib\/index\.js';?\s*/, '');
@@ -67,7 +78,9 @@ function bundleContent(extensionDir) {
   );
 
   // Extract the lib content and make it available as ConventionalShields
-  const bundledContent = `
+  // Inline badge URL cache so it works when dist/lib is removed (bundled build)
+  const bundledContent = `globalThis.BADGE_URL_CACHE = ${JSON.stringify(badgeUrlCache)};
+
 // Bundled ConventionalShields library
 const ConventionalShields = (function() {
   // Create a module-like object

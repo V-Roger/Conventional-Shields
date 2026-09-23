@@ -1,6 +1,6 @@
 {
   "name": "conventional-shields",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Conventional comments meets Shields.io",
   "main": "dist/index.js",
   "engines": {
@@ -13,9 +13,9 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "prepare:extension": "mkdir -p src/extension/lib && mkdir -p src/extension/lib/config && cp dist/index.js src/extension/lib/index.js && cp dist/config/palette.json src/extension/lib/config/palette.json && cp dist/index.d.ts src/extension/lib/index.d.ts && (cp src/config/badge-url-cache.json src/extension/lib/config/badge-url-cache.json 2>/dev/null || true)",
-    "prepare:raycast": "mkdir -p src/raycast-scripts/lib && mkdir -p src/raycast-scripts/lib/config && cp dist/index.js src/raycast-scripts/lib/index.js && cp dist/config/palette.json src/extension/lib/config/palette.json",
+    "prepare:raycast": "mkdir -p src/raycast-scripts/lib && mkdir -p src/raycast-scripts/lib/config && cp dist/index.js src/raycast-scripts/lib/index.js && cp dist/config/palette.json src/raycast-scripts/lib/config/palette.json",
     "generate:badge-cache": "pnpm build && node dist/scripts/generate-badge-cache.js",
-    "build:raycast": "npm run build && npm run prepare:raycast"
+    "build:raycast": "pnpm run build && pnpm run prepare:raycast"
   },
   "keywords": [
     "conventionalComments",
